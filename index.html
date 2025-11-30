@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +8,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <input type="text" id="result" readonly>
+    <div class="logo-container">
+        <div class="logo">🧮</div>
+    </div>
+    <div class="content-container hidden">
+        <div class="calculator">
+            <div class="display">
+                <input type="text" id="result" readonly>
+            </div>
+            <div class="buttons">
+                <button class="btn clear" onclick="clearDisplay()">C</button>
+                <button class="btn operator" onclick="appendToDisplay('/')">/</button>
+                <button class="btn operator" onclick="appendToDisplay('*')">×</button>
+                <button class="btn operator" onclick="backspace()">⌫</button>
+
+                <button class="btn number" onclick="appendToDisplay('7')">7</button>
+                <button class="btn number" onclick="appendToDisplay('8')">8</button>
+                <button class="btn number" onclick="appendToDisplay('9')">9</button>
+                <button class="btn operator" onclick="appendToDisplay('-')">-</button>
+
+                <button class="btn number" onclick="appendToDisplay('4')">4</button>
+                <button class="btn number" onclick="appendToDisplay('5')">5</button>
+                <button class="btn number" onclick="appendToDisplay('6')">6</button>
+                <button class="btn operator" onclick="appendToDisplay('+')">+</button>
+
+                <button class="btn number" onclick="appendToDisplay('1')">1</button>
+                <button class="btn number" onclick="appendToDisplay('2')">2</button>
+                <button class="btn number" onclick="appendToDisplay('3')">3</button>
+                <button class="btn equals" onclick="calculateResult()" rowspan="2">=</button>
+
+                <button class="btn number zero" onclick="appendToDisplay('0')">0</button>
+                <button class="btn number" onclick="appendToDisplay('.')">.</button>
+            </div>
         </div>
-        <div class="buttons">
-            <button class="btn clear" onclick="clearDisplay()">C</button>
-            <button class="btn operator" onclick="appendToDisplay('/')">/</button>
-            <button class="btn operator" onclick="appendToDisplay('*')">×</button>
-            <button class="btn operator" onclick="backspace()">⌫</button>
-            
-            <button class="btn number" onclick="appendToDisplay('7')">7</button>
-            <button class="btn number" onclick="appendToDisplay('8')">8</button>
-            <button class="btn number" onclick="appendToDisplay('9')">9</button>
-            <button class="btn operator" onclick="appendToDisplay('-')">-</button>
-            
-            <button class="btn number" onclick="appendToDisplay('4')">4</button>
-            <button class="btn number" onclick="appendToDisplay('5')">5</button>
-            <button class="btn number" onclick="appendToDisplay('6')">6</button>
-            <button class="btn operator" onclick="appendToDisplay('+')">+</button>
-            
-            <button class="btn number" onclick="appendToDisplay('1')">1</button>
-            <button class="btn number" onclick="appendToDisplay('2')">2</button>
-            <button class="btn number" onclick="appendToDisplay('3')">3</button>
-            <button class="btn equals" onclick="calculateResult()" rowspan="2">=</button>
-            
-            <button class="btn number zero" onclick="appendToDisplay('0')">0</button>
-            <button class="btn number" onclick="appendToDisplay('.')">.</button>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="landing.html" style="color: white; text-decoration: none; font-size: 1.2rem;">Or browse all calculators →</a>
         </div>
     </div>
     <script src="script.js"></script>

@@ -19,14 +19,14 @@ function backspace() {
 function calculateResult() {
     const resultDisplay = document.getElementById('result');
     let expression = resultDisplay.value;
-    
+
     // Replace × with * for evaluation
     expression = expression.replace(/×/g, '*');
-    
+
     try {
         // Using Function constructor as a safer alternative to eval
         const result = new Function('return ' + expression)();
-        
+
         // Check if result is a valid number
         if (isNaN(result) || !isFinite(result)) {
             resultDisplay.value = 'Error';
@@ -39,10 +39,35 @@ function calculateResult() {
     }
 }
 
+// Add fade-in effect after page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for a brief moment before starting the fade-in
+    setTimeout(function() {
+        // Hide the logo
+        const logoContainer = document.querySelector('.logo-container');
+        if (logoContainer) {
+            logoContainer.style.opacity = '0';
+            logoContainer.style.transition = 'opacity 0.5s ease-out';
+
+            // After logo fades out, show the calculator
+            setTimeout(function() {
+                logoContainer.style.display = 'none';
+
+                // Show the calculator content
+                const contentContainer = document.querySelector('.content-container');
+                if (contentContainer) {
+                    contentContainer.classList.remove('hidden');
+                    contentContainer.classList.add('visible');
+                }
+            }, 500);
+        }
+    }, 500); // Show the logo for 500ms before starting fade-in
+});
+
 // Add keyboard support
 document.addEventListener('keydown', function(event) {
     const key = event.key;
-    
+
     if (/[0-9\+\-\*\/\.]/.test(key)) {
         if (key === '*') {
             appendToDisplay('×');
