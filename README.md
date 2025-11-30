@@ -85,4 +85,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - JustinReyes28@proton.me
 
-Project Link: [https://github.com/JustinReyes28/EasyCalc](https://github.com/JustinReyes28/EasyCalc)
+Project Link: [https://github.com/JustinReyes28/EasyCalc](https://justinreyes28.github.io/EasyCalc/)
