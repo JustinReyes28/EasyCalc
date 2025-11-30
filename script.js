@@ -1,43 +1,112 @@
-function appendToDisplay(value) {
-    const resultDisplay = document.getElementById('result');
-    // Replace displayed × with * for calculation
-    if (value === '×') {
-        value = '*';
-    }
-    resultDisplay.value += value;
-}
-
-function clearDisplay() {
-    document.getElementById('result').value = '';
-}
-
-function backspace() {
-    const resultDisplay = document.getElementById('result');
-    resultDisplay.value = resultDisplay.value.slice(0, -1);
-}
-
-function calculateResult() {
-    const resultDisplay = document.getElementById('result');
-    let expression = resultDisplay.value;
-
-    // Replace × with * for evaluation
-    expression = expression.replace(/×/g, '*');
-
-    try {
-        // Using Function constructor as a safer alternative to eval
-        const result = new Function('return ' + expression)();
-
-        // Check if result is a valid number
-        if (isNaN(result) || !isFinite(result)) {
-            resultDisplay.value = 'Error';
-        } else {
-            // Format the result to avoid long decimal numbers
-            resultDisplay.value = parseFloat(result.toFixed(10)).toString();
+// Add CSS styles dynamically
+function addStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    } catch (error) {
-        resultDisplay.value = 'Error';
-    }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Initial hidden state for fade-in effect */
+        .hidden {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* Visible state for fade-in effect */
+        .visible {
+            opacity: 1;
+        }
+
+        /* Logo container styling for initial display */
+        .logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 4rem;
+            opacity: 1;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            to { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        /* Content container styling */
+        .content-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-container > div {
+            text-align: center;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--card-shadow);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+    `;
+    document.head.appendChild(style);
 }
+
+// Run the style injection when the page loads
+document.addEventListener('DOMContentLoaded', addStyles);
 
 // Add fade-in effect after page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -49,11 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
             logoContainer.style.opacity = '0';
             logoContainer.style.transition = 'opacity 0.5s ease-out';
 
-            // After logo fades out, show the calculator
+            // After logo fades out, show the content
             setTimeout(function() {
                 logoContainer.style.display = 'none';
 
-                // Show the calculator content
+                // Show the content
                 const contentContainer = document.querySelector('.content-container');
                 if (contentContainer) {
                     contentContainer.classList.remove('hidden');
@@ -62,23 +131,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     }, 500); // Show the logo for 500ms before starting fade-in
-});
-
-// Add keyboard support
-document.addEventListener('keydown', function(event) {
-    const key = event.key;
-
-    if (/[0-9\+\-\*\/\.]/.test(key)) {
-        if (key === '*') {
-            appendToDisplay('×');
-        } else {
-            appendToDisplay(key);
-        }
-    } else if (key === 'Enter' || key === '=') {
-        calculateResult();
-    } else if (key === 'Escape') {
-        clearDisplay();
-    } else if (key === 'Backspace') {
-        backspace();
-    }
 });
