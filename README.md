@@ -53,12 +53,12 @@ You only need a web browser (like Chrome, Firefox, Safari, Edge) to view and int
     cd EasyCalc
     ```
 
-3.  **Open `landing.html`:**
-    Simply open the `landing.html` file in your preferred web browser. You can do this by double-clicking the file or by dragging it into your browser window.
+3.  **Open `index.html`:**
+    Simply open the `index.html` file in your preferred web browser. You can do this by double-clicking the file or by dragging it into your browser window.
 
 ## Usage
 
-Once you open `landing.html` in your browser, you will see the calculator interface:
+Once you open `index.html` in your browser, you will see the calculator interface:
 
 1.  **Enter Numbers**: Click on the number buttons (0-9) to input numbers.
 2.  **Select Operation**: Click on the operator buttons (+, -, \*, /) to choose an arithmetic operation.
