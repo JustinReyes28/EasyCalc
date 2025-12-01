@@ -1,0 +1,184 @@
+/* CSS Variables - ensure consistency with landing.css if possible */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--light-color); /* Default text color */
+}
+
+.calculator-container {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    max-width: 600px;
+    width: 100%;
+}
+
+h1 {
+    color: var(--light-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.back-link:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.gwa-calculator-content {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+}
+
+.course-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-row input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.course-row input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-color), 0 0 0 6px rgba(52, 152, 219, 0.5);
+}
+
+.course-row button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.course-row button:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+#add-course-btn,
+#calculate-gwa-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+#add-course-btn:hover,
+#calculate-gwa-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+#calculate-gwa-btn {
+    background-color: var(--success-color);
+}
+
+#calculate-gwa-btn:hover {
+    background-color: #27ae60;
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
+
+
+#gwa-result {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--light-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .course-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .course-row input,
+    .course-row button {
+        width: 100%;
+    }
+
+    #add-course-btn,
+    #calculate-gwa-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    #gwa-result {
+        font-size: 1.5rem;
+    }
+}
