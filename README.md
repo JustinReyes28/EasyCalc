@@ -58,12 +58,40 @@ You only need a web browser (like Chrome, Firefox, Safari, Edge) to view and int
 
 ## Usage
 
-Once you open `index.html` in your browser, you will see the calculator interface:
+Open `index.html` in your browser. You will see a menu or set of tabs that let you choose among the available tools. Select the tool you want, then follow its workflow.
 
-1.  **Enter Numbers**: Click on the number buttons (0-9) to input numbers.
-2.  **Select Operation**: Click on the operator buttons (+, -, \*, /) to choose an arithmetic operation.
-3.  **Get Result**: Click the "=" button to see the result of your calculation.
-4.  **Clear Entry (CE/C)**: Use the "C" button to clear the current display or reset the calculator.
+### Arithmetic Calculator
+1. Enter numbers using the number buttons.
+2. Choose an operator such as +, -, *, or /.
+3. Press "=" to compute the result.
+4. Use "C" to clear the display.
+
+### Scientific Calculator
+1. Input a value using the keypad.
+2. Select scientific functions like sin, cos, tan, log, exponent, or roots.
+3. Press "=" to view the output.
+4. Clear the current entry with the reset button.
+
+### Unit Conversion
+1. Pick a category such as length, weight, temperature, or volume.
+2. Enter a value and select the units to convert from and to.
+3. View the converted result instantly.
+
+### GWA Calculator
+1. Enter each subject, its unit value, and the corresponding grade.
+2. Add all entries to the table.
+3. Click the calculate button to generate your General Weighted Average.
+
+### Health Tools
+1. Choose a tool such as BMI calculator or calorie estimator.
+2. Provide the required inputs like height, weight, or activity details.
+3. Review the calculated health metrics.
+
+### Date Tools
+1. Select a function like date difference, age computation, or day finder.
+2. Enter the date values needed.
+3. Read the computed output immediately.
+
 
 ## Contributing
 
@@ -85,4 +113,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - JustinReyes28@proton.me
 
-Project Link: [https://github.com/JustinReyes28/EasyCalc](https://justinreyes28.github.io/EasyCalc/)
+Project Link: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
