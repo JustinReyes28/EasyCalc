@@ -83,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'health':
                 pageUrl = 'health.html';
                 break;
+            case 'datetime':
+                pageUrl = 'datetime.html';
+                break;
             default:
                 console.error('Unknown calculator type:', calculatorType);
                 return;

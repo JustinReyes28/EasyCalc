@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date & Time Tools - EasyCalc</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .calculator-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e3f2fd;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-align: center;
+            display: none;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .time-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .time-inputs input {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Date & Time Tools</h1>
+            <p>Calculate date differences, age, countdowns, and time intervals for your scheduling needs</p>
+        </header>
+        
+        <a href="index.html" class="back-link">← Back to Calculator Suite</a>
+        
+        <div class="calculator-grid">
+            <div class="calculator-card">
+                <h3>Date Difference Calculator</h3>
+                <div class="input-group">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                </div>
+                <div class="input-group">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                </div>
+                <button onclick="calculateDateDifference()">Calculate Difference</button>
+                <div id="date-diff-result" class="result"></div>
+            </div>
+            
+            <div class="calculator-card">
+                <h3>Age Calculator</h3>
+                <div class="input-group">
+                    <label for="birth-date">Date of Birth:</label>
+                    <input type="date" id="birth-date">
+                </div>
+                <button onclick="calculateAge()">Calculate Age</button>
+                <div id="age-result" class="result"></div>
+            </div>
+            
+            <div class="calculator-card">
+                <h3>Add/Subtract Days</h3>
+                <div class="input-group">
+                    <label for="base-date">Base Date:</label>
+                    <input type="date" id="base-date">
+                </div>
+                <div class="input-group">
+                    <label for="days-to-add">Days to Add (use negative to subtract):</label>
+                    <input type="number" id="days-to-add" placeholder="Enter number of days">
+                </div>
+                <button onclick="addSubtractDays()">Calculate Date</button>
+                <div id="date-result" class="result"></div>
+            </div>
+            
+            <div class="calculator-card">
+                <h3>Anniversary Countdown</h3>
+                <div class="input-group">
+                    <label for="anniversary-date">Anniversary Date:</label>
+                    <input type="date" id="anniversary-date">
+                </div>
+                <button onclick="calculateCountdown()">Days Until Event</button>
+                <div id="countdown-result" class="result"></div>
+            </div>
+            
+            <div class="calculator-card">
+                <h3>Time Interval Calculator</h3>
+                <div class="input-group">
+                    <label for="start-time">Start Time (HH:MM:SS):</label>
+                    <div class="time-inputs">
+                        <input type="number" id="start-hour" placeholder="HH" min="0" max="23">
+                        <input type="number" id="start-minute" placeholder="MM" min="0" max="59">
+                        <input type="number" id="start-second" placeholder="SS" min="0" max="59">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="end-time">End Time (HH:MM:SS):</label>
+                    <div class="time-inputs">
+                        <input type="number" id="end-hour" placeholder="HH" min="0" max="23">
+                        <input type="number" id="end-minute" placeholder="MM" min="0" max="59">
+                        <input type="number" id="end-second" placeholder="SS" min="0" max="59">
+                    </div>
+                </div>
+                <button onclick="calculateTimeInterval()">Calculate Time Difference</button>
+                <div id="time-result" class="result"></div>
+            </div>
+            
+            <div class="calculator-card">
+                <h3>Add Time to Current Time</h3>
+                <div class="input-group">
+                    <label for="add-hour">Hours to Add:</label>
+                    <input type="number" id="add-hour" placeholder="Enter hours" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="add-minute">Minutes to Add:</label>
+                    <input type="number" id="add-minute" placeholder="Enter minutes" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="add-second">Seconds to Add:</label>
+                    <input type="number" id="add-second" placeholder="Enter seconds" value="0">
+                </div>
+                <button onclick="addTime()">Calculate Time</button>
+                <div id="add-time-result" class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today as default for date inputs
+        window.onload = function() {
+            const today = new Date().toISOString().split('T')[0];
+            const startDate = document.getElementById('start-date');
+            const endDate = document.getElementById('end-date');
+            const birthDate = document.getElementById('birth-date');
+            const baseDate = document.getElementById('base-date');
+            const anniversaryDate = document.getElementById('anniversary-date');
+            
+            startDate.value = today;
+            endDate.value = today;
+            birthDate.value = today;
+            baseDate.value = today;
+            anniversaryDate.value = today;
+        };
+
+        function calculateDateDifference() {
+            const startDate = new Date(document.getElementById('start-date').value);
+            const endDate = new Date(document.getElementById('end-date').value);
+            
+            if (startDate && endDate) {
+                const timeDiff = endDate.getTime() - startDate.getTime();
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                const resultDiv = document.getElementById('date-diff-result');
+                resultDiv.style.display = 'block';
+                
+                if (daysDiff >= 0) {
+                    resultDiv.innerHTML = `${daysDiff} day(s) between the dates`;
+                } else {
+                    resultDiv.innerHTML = `${Math.abs(daysDiff)} day(s) between the dates (Start date is after End date)`;
+                }
+            } else {
+                alert("Please select both dates.");
+            }
+        }
+
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birth-date').value);
+            
+            if (birthDate) {
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                
+                const resultDiv = document.getElementById('age-result');
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `You are ${age} years old`;
+            } else {
+                alert("Please select a birth date.");
+            }
+        }
+
+        function addSubtractDays() {
+            const baseDate = new Date(document.getElementById('base-date').value);
+            const days = parseInt(document.getElementById('days-to-add').value);
+            
+            if (baseDate && !isNaN(days)) {
+                const newDate = new Date(baseDate);
+                newDate.setDate(newDate.getDate() + days);
+                
+                const resultDiv = document.getElementById('date-result');
+                resultDiv.style.display = 'block';
+                
+                const formattedDate = newDate.toISOString().split('T')[0];
+                resultDiv.innerHTML = `New date: ${formattedDate}`;
+            } else {
+                alert("Please select a base date and enter a valid number of days.");
+            }
+        }
+
+        function calculateCountdown() {
+            const anniversaryDate = new Date(document.getElementById('anniversary-date').value);
+            const today = new Date();
+            
+            if (anniversaryDate) {
+                const timeDiff = anniversaryDate.getTime() - today.getTime();
+                const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                const resultDiv = document.getElementById('countdown-result');
+                resultDiv.style.display = 'block';
+                
+                if (daysLeft > 0) {
+                    resultDiv.innerHTML = `${daysLeft} day(s) until the event`;
+                } else if (daysLeft === 0) {
+                    resultDiv.innerHTML = "Today is the event!";
+                } else {
+                    resultDiv.innerHTML = `The event was ${Math.abs(daysLeft)} day(s) ago`;
+                }
+            } else {
+                alert("Please select an anniversary date.");
+            }
+        }
+
+        function calculateTimeInterval() {
+            const startHour = parseInt(document.getElementById('start-hour').value) || 0;
+            const startMinute = parseInt(document.getElementById('start-minute').value) || 0;
+            const startSecond = parseInt(document.getElementById('start-second').value) || 0;
+            
+            const endHour = parseInt(document.getElementById('end-hour').value) || 0;
+            const endMinute = parseInt(document.getElementById('end-minute').value) || 0;
+            const endSecond = parseInt(document.getElementById('end-second').value) || 0;
+            
+            // Validate inputs
+            if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 || 
+                startSecond < 0 || startSecond > 59 || endHour < 0 || endHour > 23 || 
+                endMinute < 0 || endMinute > 59 || endSecond < 0 || endSecond > 59) {
+                alert("Please enter valid time values (Hours: 0-23, Minutes/Seconds: 0-59)");
+                return;
+            }
+            
+            // Convert to total seconds
+            const startTimeSeconds = startHour * 3600 + startMinute * 60 + startSecond;
+            const endTimeSeconds = endHour * 3600 + endMinute * 60 + endSecond;
+            
+            // Calculate difference
+            let diffSeconds = endTimeSeconds - startTimeSeconds;
+            if (diffSeconds < 0) {
+                diffSeconds = 86400 + diffSeconds; // Add 24 hours if negative
+            }
+            
+            const hours = Math.floor(diffSeconds / 3600);
+            const minutes = Math.floor((diffSeconds % 3600) / 60);
+            const seconds = diffSeconds % 60;
+            
+            const resultDiv = document.getElementById('time-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Difference: ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function addTime() {
+            const addHour = parseInt(document.getElementById('add-hour').value) || 0;
+            const addMinute = parseInt(document.getElementById('add-minute').value) || 0;
+            const addSecond = parseInt(document.getElementById('add-second').value) || 0;
+            
+            // Validate inputs
+            if (addHour < 0 || addMinute < 0 || addMinute > 59 || addSecond < 0 || addSecond > 59) {
+                alert("Please enter valid time values (Minutes/Seconds: 0-59)");
+                return;
+            }
+            
+            const now = new Date();
+            now.setHours(now.getHours() + addHour, now.getMinutes() + addMinute, now.getSeconds() + addSecond);
+            
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            const resultDiv = document.getElementById('add-time-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `New time: ${hours}:${minutes}:${seconds}`;
+        }
+    </script>
+</body>
+</html>
