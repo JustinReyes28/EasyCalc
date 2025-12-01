@@ -53,8 +53,8 @@ You only need a web browser (like Chrome, Firefox, Safari, Edge) to view and int
     cd EasyCalc
     ```
 
-3.  **Open `landing.html`:**
-    Simply open the `landing.html` file in your preferred web browser. You can do this by double-clicking the file or by dragging it into your browser window.
+3.  **Open `index.html`:**
+    Simply open the `index.html` file in your preferred web browser. You can do this by double-clicking the file or by dragging it into your browser window.
 
 ## Usage
 
