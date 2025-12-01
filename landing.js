@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'gwa':
                 pageUrl = 'gwa.html';
                 break;
+            case 'health':
+                pageUrl = 'health.html';
+                break;
             default:
                 console.error('Unknown calculator type:', calculatorType);
                 return;
