@@ -138,6 +138,7 @@ header p {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
+    justify-content: center;
 }
 
 .btn-primary,
