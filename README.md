@@ -113,4 +113,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - JustinReyes28@proton.me
 
-Project Link: [https://github.com/JustinReyes28/EasyCalc](https://justinreyes28.github.io/EasyCalc/)
+Project Link: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
