@@ -93,8 +93,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 gwaResult.style.color = 'orange';
             } else {
                 const gwa = totalGradePoints / totalUnits;
-                gwaResult.textContent = `Your GWA is: ${gwa.toFixed(2)}`;
-                gwaResult.style.color = 'white';
+                let scholarshipStatus = '';
+                if (gwa < 1.50) {
+                    scholarshipStatus = 'You are a University Scholar!';
+                    gwaResult.style.color = 'gold'; // A color that signifies achievement
+                } else if (gwa < 1.75) {
+                    scholarshipStatus = 'You are a College Scholar!';
+                    gwaResult.style.color = 'silver'; // A color that signifies achievement
+                } else {
+                    gwaResult.style.color = 'green';
+                }
+                gwaResult.textContent = `Your GWA is: ${gwa.toFixed(2)}. ${scholarshipStatus}`;
             }
         }
 
