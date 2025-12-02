@@ -5,7 +5,13 @@ function convertLength() {
     const toUnit = document.getElementById('to-length-unit').value;
     const resultSpan = document.getElementById('length-result');
 
-    const meters = input * getMeterMultiplier(fromUnit);
+    if (input === '') {
+        resultSpan.textContent = '0';
+        return;
+    }
+
+    const meters = parseFloat(input) * getMeterMultiplier(fromUnit);
+    const result = meters / getMeterMultiplier(toUnit);
     resultSpan.textContent = `${result.toFixed(2)}`;
 }
 
@@ -30,7 +36,12 @@ function convertWeight() {
     const toUnit = document.getElementById('to-weight-unit').value;
     const resultSpan = document.getElementById('weight-result');
 
-    const grams = input * getGramMultiplier(fromUnit);
+    if (input === '') {
+        resultSpan.textContent = '0';
+        return;
+    }
+
+    const grams = parseFloat(input) * getGramMultiplier(fromUnit);
     const result = grams / getGramMultiplier(toUnit);
     resultSpan.textContent = `${result.toFixed(2)}`;
 }
@@ -53,7 +64,12 @@ function convertVolume() {
     const toUnit = document.getElementById('to-volume-unit').value;
     const resultSpan = document.getElementById('volume-result');
 
-    const liters = input * getLiterMultiplier(fromUnit);
+    if (input === '') {
+        resultSpan.textContent = '0';
+        return;
+    }
+
+    const liters = parseFloat(input) * getLiterMultiplier(fromUnit);
     const result = liters / getLiterMultiplier(toUnit);
 
     resultSpan.textContent = `${result.toFixed(2)}`;
@@ -74,11 +90,17 @@ function getLiterMultiplier(unit) {
 
 // Temperature Conversion
 function convertTemperature() {
-    const input = parseFloat(document.getElementById('temp-input').value);
+    const inputStr = document.getElementById('temp-input').value;
     const fromUnit = document.getElementById('from-temp-unit').value;
     const toUnit = document.getElementById('to-temp-unit').value;
     const resultSpan = document.getElementById('temp-result');
 
+    if (inputStr === '') {
+        resultSpan.textContent = '0';
+        return;
+    }
+
+    const input = parseFloat(inputStr);
     let result;
 
     if (fromUnit === toUnit) {
