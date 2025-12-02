@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 const gwa = totalGradePoints / totalUnits;
                 gwaResult.textContent = `Your GWA is: ${gwa.toFixed(2)}`;
-                gwaResult.style.color = 'green';
+                gwaResult.style.color = 'white';
             }
         }
 
