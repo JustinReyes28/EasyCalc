@@ -124,36 +124,29 @@ h1 {
 }
 
 
-/* Responsive Design for smaller screens */
-@media (max-width: 480px) {
-    .converter-container {
-        padding: 1rem;
-    }
+.btn.operator {
+    display: block; /* Make it take full width within its container */
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white; /* Text color */
+    background-color: var(--primary-color); /* Use primary color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
 
-    h1 {
-        font-size: 2rem;
-    }
+.btn.operator:hover {
+    background-color: #2980b9; /* Darker shade of primary color on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
 
-    .converter {
-        width: 100%;
-        max-width: 300px;
-        padding: 15px;
-    }
-
-    .input-group input,
-    .input-group select {
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-
-    .result {
-        font-size: 1.5rem;
-        min-height: 50px;
-        padding: 10px;
-    }
-
-    .back-link {
-        margin-top: 1.5rem;
-        padding: 0.6rem 1.2rem;
-    }
+.btn.operator:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
