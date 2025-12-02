@@ -6,6 +6,7 @@ function convertLength() {
     const resultSpan = document.getElementById('length-result');
 
     const meters = input * getMeterMultiplier(fromUnit);
+    const result = meters / getMeterMultiplier(toUnit);
     resultSpan.textContent = `Result: ${result.toFixed(2)}`;
 }
 
@@ -31,6 +32,7 @@ function convertWeight() {
     const resultSpan = document.getElementById('weight-result');
 
     const grams = input * getGramMultiplier(fromUnit);
+    const result = grams / getGramMultiplier(toUnit);
         resultSpan.textContent = `Result: ${result.toFixed(2)}`;
 }
 
