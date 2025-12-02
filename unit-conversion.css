@@ -1,0 +1,152 @@
+/* CSS Variables - ensure consistency with landing.css if possible */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+body {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--light-color); /* Default text color */
+}
+
+.converter-container { /* Changed from .calculator-container */
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+h1 {
+    color: var(--light-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.back-link:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.converter { /* Changed from .calculator */
+    width: 360px; /* Current width */
+    margin: 20px auto;
+    background-color: var(--dark-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+/* Specific styles for unit converter */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    color: var(--light-color);
+}
+
+.input-group input[type="number"],
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    color: var(--secondary-color);
+    box-sizing: border-box;
+    -webkit-appearance: none; /* Remove default select styling for some browsers */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232c3e50%22%20d%3D%22M287%2C184.7L146.2%2C325.5L5.4%2C184.7C-1.8%2C177.5-1.8%2C165.7%2C5.4%2C158.5c7.2-7.2%2C19-7.2%2C26.2%2C0l114.6%2C114.6l114.6-114.6c7.2-7.2%2C19-7.2%2C26.2%2C0C294.2%2C165.7%2C294.2%2C177.5%2C287%2C184.7z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.input-group select {
+    padding-right: 30px; /* Make space for the custom arrow */
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1.8rem;
+    color: var(--light-color);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+}
+
+
+.btn.operator {
+    display: block; /* Make it take full width within its container */
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white; /* Text color */
+    background-color: var(--primary-color); /* Use primary color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn.operator:hover {
+    background-color: #2980b9; /* Darker shade of primary color on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.btn.operator:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
