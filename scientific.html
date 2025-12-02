@@ -14,6 +14,7 @@
             <input type="text" class="display" id="display" readonly>
             <div class="buttons">
                 <button class="btn clear span-two" onclick="clearDisplay()">C</button>
+                <button class="btn" onclick="backspace()">&larr;</button>
                 <button class="btn function" onclick="appendToDisplay('(')">(</button>
                 <button class="btn function" onclick="appendToDisplay(')')">)</button>
                 <button class="btn operator" onclick="appendToDisplay('/')">÷</button>
@@ -75,21 +76,35 @@
             display.value = '';
         }
 
+        function backspace() {
+            display.value = display.value.slice(0, -1);
+        }
+
         function calculate() {
             try {
-                // Replace × with * and ÷ with / in the expression before evaluating
-                let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
+                // Replace × with * and ÷ with / and ^ with ** in the expression before evaluating
+                let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
+
+                // Define degree-trigonometric functions
+                expression = 'function sinDeg(x) { return Math.sin(x * Math.PI / 180); } function cosDeg(x) { return Math.cos(x * Math.PI / 180); } function tanDeg(x) { return Math.tan(x * Math.PI / 180); } function factorial(n) { if (n < 0 || !Number.isInteger(n)) return NaN; let result = 1; for (let i = 2; i <= n; i++) result *= i; return result; } ' + expression;
+
+                // Handle the factorial operator (!) by converting it to a factorial function call
+                // This regex will find numbers followed by ! and replace with factorial(number)
+                expression = expression.replace(/(\d+)!/g, 'factorial($1)');
 
                 // Handle special functions that need to be converted for eval
-                expression = expression.replace(/sin\(/g, 'Math.sin(');
-                expression = expression.replace(/cos\(/g, 'Math.cos(');
-                expression = expression.replace(/tan\(/g, 'Math.tan(');
+                expression = expression.replace(/sin\(/g, 'sinDeg(');
+                expression = expression.replace(/cos\(/g, 'cosDeg(');
+                expression = expression.replace(/tan\(/g, 'tanDeg(');
                 expression = expression.replace(/log\(/g, 'Math.log10(');
                 expression = expression.replace(/ln\(/g, 'Math.log(');
                 expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
                 expression = expression.replace(/exp\(/g, 'Math.exp(');
+                expression = expression.replace(/pow\(/g, 'Math.pow(');
                 expression = expression.replace(/π/g, 'Math.PI');
                 expression = expression.replace(/e/g, 'Math.E');
+                expression = expression.replace(/\bPI\b/g, 'Math.PI');
+                expression = expression.replace(/\bE\b/g, 'Math.E');
 
                 // Evaluate the expression
                 let result = eval(expression);
@@ -125,18 +140,14 @@
             }
         }
 
-        // Scientific functions
+        // Scientific functions - these now add the function to the display for expression evaluation
         function calculateSin() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'sin(';
+                } else {
+                    display.value = 'sin(' + display.value + ')';
                 }
-                display.value = Math.sin(currentValue * Math.PI / 180); // Convert to radians
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -147,15 +158,11 @@
 
         function calculateCos() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'cos(';
+                } else {
+                    display.value = 'cos(' + display.value + ')';
                 }
-                display.value = Math.cos(currentValue * Math.PI / 180); // Convert to radians
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -166,15 +173,11 @@
 
         function calculateTan() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'tan(';
+                } else {
+                    display.value = 'tan(' + display.value + ')';
                 }
-                display.value = Math.tan(currentValue * Math.PI / 180); // Convert to radians
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -185,15 +188,11 @@
 
         function calculateLog() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue) || currentValue <= 0) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'log(';
+                } else {
+                    display.value = 'log(' + display.value + ')';
                 }
-                display.value = Math.log10(currentValue);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -204,15 +203,11 @@
 
         function calculateLn() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue) || currentValue <= 0) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'ln(';
+                } else {
+                    display.value = 'ln(' + display.value + ')';
                 }
-                display.value = Math.log(currentValue);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -223,15 +218,11 @@
 
         function calculateSqrt() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue) || currentValue < 0) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'sqrt(';
+                } else {
+                    display.value = 'sqrt(' + display.value + ')';
                 }
-                display.value = Math.sqrt(currentValue);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -242,7 +233,7 @@
 
         function calculatePower() {
             try {
-                display.value += '^';
+                display.value += '**';
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -253,15 +244,11 @@
 
         function calculateExp() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = 'exp(';
+                } else {
+                    display.value = 'exp(' + display.value + ')';
                 }
-                display.value = Math.exp(currentValue);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -271,29 +258,16 @@
         }
 
         function calculatePi() {
-            display.value = Math.PI;
+            display.value += 'PI';
         }
 
         function calculateE() {
-            display.value = Math.E;
+            display.value += 'E';
         }
 
         function calculateFactorial() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue) || currentValue < 0 || !Number.isInteger(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
-                }
-
-                let result = 1;
-                for (let i = 2; i <= currentValue; i++) {
-                    result *= i;
-                }
-                display.value = result;
+                display.value += '!';
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -304,15 +278,11 @@
 
         function calculateSquare() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = '**2';
+                } else {
+                    display.value = '(' + display.value + ')**2';
                 }
-                display.value = Math.pow(currentValue, 2);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -323,15 +293,11 @@
 
         function calculateCube() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = '**3';
+                } else {
+                    display.value = '(' + display.value + ')**3';
                 }
-                display.value = Math.pow(currentValue, 3);
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
@@ -342,15 +308,11 @@
 
         function calculateInverse() {
             try {
-                let currentValue = parseFloat(display.value);
-                if (isNaN(currentValue) || currentValue === 0) {
-                    display.value = 'Error: Div by 0';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
+                if (display.value === '') {
+                    display.value = '1/';
+                } else {
+                    display.value = '1/(' + display.value + ')';
                 }
-                display.value = 1 / currentValue;
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(() => {
