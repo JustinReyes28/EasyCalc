@@ -3,46 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Conversion Calculator - EasyCalc</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .calculator-container {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .back-link:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <title>Unit Conversion - EasyCalc</title>
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Unit Conversion Calculator</h1>
-        <p>This is where your unit conversion calculator would be.</p>
-        <a href="index.html" class="back-link">← Back to Calculator Suite</a>
-    </div>
+    <h1>Unit Conversion</h1>
+
+    <!-- Length Conversion -->
+    <section>
+        <h2>Length</h2>
+        <input type="number" id="length-input" placeholder="Enter length">
+        <select id="from-length-unit">
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+            <option value="cm">Centimeter</option>
+            <option value="mm">Millimeter</option>
+            <option value="mi">Mile</option>
+            <option value="yd">Yard</option>
+            <option value="ft">Foot</option>
+            <option value="in">Inch</option>
+        </select>
+        <span>to</span>
+        <select id="to-length-unit">
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+            <option value="cm">Centimeter</option>
+            <option value="mm">Millimeter</option>
+            <option value="mi">Mile</option>
+            <option value="yd">Yard</option>
+            <option value="ft">Foot</option>
+            <option value="in">Inch</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        <p>Result: <span id="length-result"></span></p>
+    </section>
+
+    <!-- Weight Conversion -->
+    <section>
+        <h2>Weight</h2>
+        <input type="number" id="weight-input" placeholder="Enter weight">
+        <select id="from-weight-unit">
+            <option value="kg">Kilogram</option>
+            <option value="g">Gram</option>
+            <option value="mg">Milligram</option>
+            <option value="lb">Pound</option>
+            <option value="oz">Ounce</option>
+        </select>
+        <span>to</span>
+        <select id="to-weight-unit">
+            <option value="kg">Kilogram</option>
+            <option value="g">Gram</option>
+            <option value="mg">Milligram</option>
+            <option value="lb">Pound</option>
+            <option value="oz">Ounce</option>
+        </select>
+        <button onclick="convertWeight()">Convert</button>
+        <p>Result: <span id="weight-result"></span></p>
+    </section>
+
+    <!-- Volume Conversion -->
+    <section>
+        <h2>Volume</h2>
+        <input type="number" id="volume-input" placeholder="Enter volume">
+        <select id="from-volume-unit">
+            <option value="l">Liter</option>
+            <option value="ml">Milliliter</option>
+            <option value="gal">Gallon</option>
+            <option value="qt">Quart</option>
+            <option value="pt">Pint</option>
+            <option value="cup">Cup</option>
+            <option value="fl-oz">Fluid Ounce</option>
+        </select>
+        <span>to</span>
+        <select id="to-volume-unit">
+            <option value="l">Liter</option>
+            <option value="ml">Milliliter</option>
+            <option value="gal">Gallon</option>
+            <option value="qt">Quart</option>
+            <option value="pt">Pint</option>
+            <option value="cup">Cup</option>
+            <option value="fl-oz">Fluid Ounce</option>
+        </select>
+        <button onclick="convertVolume()">Convert</button>
+        <p>Result: <span id="volume-result"></span></p>
+    </section>
+
+    <!-- Temperature Conversion -->
+    <section>
+        <h2>Temperature</h2>
+        <input type="number" id="temp-input" placeholder="Enter temperature">
+        <select id="from-temp-unit">
+            <option value="c">Celsius</option>
+            <option value="f">Fahrenheit</option>
+            <option value="k">Kelvin</option>
+        </select>
+        <span>to</span>
+        <select id="to-temp-unit">
+            <option value="c">Celsius</option>
+            <option value="f">Fahrenheit</option>
+            <option value="k">Kelvin</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <p>Result: <span id="temp-result"></span></p>
+    </section>
+
+    <a href="index.html">← Back to Calculator Suite</a>
+    <script src="unit-conversion.js"></script>
 </body>
 </html>
