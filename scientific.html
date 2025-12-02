@@ -14,34 +14,34 @@
             <input type="text" class="display" id="display" readonly>
             <div class="buttons">
                 <button class="btn clear span-two" onclick="clearDisplay()">C</button>
-                <button class="btn" onclick="backspace()">&larr;</button>
+                <button class="btn function" onclick="backspace()">&larr;</button>
                 <button class="btn function" onclick="appendToDisplay('(')">(</button>
                 <button class="btn function" onclick="appendToDisplay(')')">)</button>
                 <button class="btn operator" onclick="appendToDisplay('/')">÷</button>
 
-                <button class="btn function" onclick="calculateSin()">sin</button>
-                <button class="btn function" onclick="calculateCos()">cos</button>
-                <button class="btn function" onclick="calculateTan()">tan</button>
-                <button class="btn function" onclick="calculateLog()">log</button>
+                <button class="btn function" onclick="appendToDisplay('sin(')">sin</button>
+                <button class="btn function" onclick="appendToDisplay('cos(')">cos</button>
+                <button class="btn function" onclick="appendToDisplay('tan(')">tan</button>
+                <button class="btn function" onclick="appendToDisplay('log(')">log</button>
                 <button class="btn operator" onclick="appendToDisplay('*')">×</button>
 
-                <button class="btn function" onclick="calculateSqrt()">√</button>
-                <button class="btn function" onclick="calculatePower()">x^y</button>
-                <button class="btn function" onclick="calculateExp()">e^x</button>
-                <button class="btn function" onclick="calculateLn()">ln</button>
+                <button class="btn function" onclick="appendToDisplay('sqrt(')">√</button>
+                <button class="btn function" onclick="appendToDisplay('**')">x^y</button>
+                <button class="btn function" onclick="appendToDisplay('exp(')">e^x</button>
+                <button class="btn function" onclick="appendToDisplay('ln(')">ln</button>
                 <button class="btn operator" onclick="appendToDisplay('-')">-</button>
 
                 <button class="btn" onclick="appendToDisplay('7')">7</button>
                 <button class="btn" onclick="appendToDisplay('8')">8</button>
                 <button class="btn" onclick="appendToDisplay('9')">9</button>
-                <button class="btn function" onclick="calculatePi()">π</button>
+                <button class="btn function" onclick="appendToDisplay('Math.PI')">π</button>
                 <button class="btn operator" onclick="appendToDisplay('+')">+</button>
 
                 <button class="btn" onclick="appendToDisplay('4')">4</button>
                 <button class="btn" onclick="appendToDisplay('5')">5</button>
                 <button class="btn" onclick="appendToDisplay('6')">6</button>
-                <button class="btn function" onclick="calculateE()">e</button>
-                <button class="btn function" onclick="calculateFactorial()">x!</button>
+                <button class="btn function" onclick="appendToDisplay('Math.E')">e</button>
+                <button class="btn function" onclick="appendToDisplay('!')">x!</button>
 
                 <button class="btn" onclick="appendToDisplay('1')">1</button>
                 <button class="btn" onclick="appendToDisplay('2')">2</button>
@@ -63,7 +63,7 @@
         let display = document.getElementById('display');
 
         function appendToDisplay(value) {
-            // Replace × with * for calculation purposes
+            // Replace display symbols with actual operators for calculation
             if (value === '×') {
                 value = '*';
             } else if (value === '÷') {
@@ -82,34 +82,36 @@
 
         function calculate() {
             try {
-                // Replace × with * and ÷ with / and ^ with ** in the expression before evaluating
-                let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
+                // Create a sandboxed evaluation environment
+                const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
 
-                // Define degree-trigonometric functions
-                expression = 'function sinDeg(x) { return Math.sin(x * Math.PI / 180); } function cosDeg(x) { return Math.cos(x * Math.PI / 180); } function tanDeg(x) { return Math.tan(x * Math.PI / 180); } function factorial(n) { if (n < 0 || !Number.isInteger(n)) return NaN; let result = 1; for (let i = 2; i <= n; i++) result *= i; return result; } ' + expression;
+                // Create a self-evaluating function that includes our custom functions
+                const result = new Function(`
+                    "use strict";
+                    const sinDeg = (x) => Math.sin(x * Math.PI / 180);
+                    const cosDeg = (x) => Math.cos(x * Math.PI / 180);
+                    const tanDeg = (x) => Math.tan(x * Math.PI / 180);
+                    const factorial = (n) => {
+                        if (n < 0 || !Number.isInteger(n)) return NaN;
+                        let result = 1;
+                        for (let i = 2; i <= n; i++) result *= i;
+                        return result;
+                    };
 
-                // Handle the factorial operator (!) by converting it to a factorial function call
-                // This regex will find numbers followed by ! and replace with factorial(number)
-                expression = expression.replace(/(\d+)!/g, 'factorial($1)');
+                    // Build the expression string with all replacements
+                    let expr = \`${expression.replace(/[`\\]/g, '\\$&')}\`;
+                    expr = expr.replace(/sin\\(/g, 'sinDeg(');
+                    expr = expr.replace(/cos\\(/g, 'cosDeg(');
+                    expr = expr.replace(/tan\\(/g, 'tanDeg(');
+                    expr = expr.replace(/log\\(/g, 'Math.log10(');
+                    expr = expr.replace(/ln\\(/g, 'Math.log(');
+                    expr = expr.replace(/sqrt\\(/g, 'Math.sqrt(');
+                    expr = expr.replace(/exp\\(/g, 'Math.exp(');
+                    expr = expr.replace(/(\\d+(?:\\.\\d+)?)!/g, 'factorial($1)');
 
-                // Handle special functions that need to be converted for eval
-                expression = expression.replace(/sin\(/g, 'sinDeg(');
-                expression = expression.replace(/cos\(/g, 'cosDeg(');
-                expression = expression.replace(/tan\(/g, 'tanDeg(');
-                expression = expression.replace(/log\(/g, 'Math.log10(');
-                expression = expression.replace(/ln\(/g, 'Math.log(');
-                expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
-                expression = expression.replace(/exp\(/g, 'Math.exp(');
-                expression = expression.replace(/pow\(/g, 'Math.pow(');
-                expression = expression.replace(/π/g, 'Math.PI');
-                expression = expression.replace(/e/g, 'Math.E');
-                expression = expression.replace(/\bPI\b/g, 'Math.PI');
-                expression = expression.replace(/\bE\b/g, 'Math.E');
+                    return eval(expr);
+                `)();
 
-                // Evaluate the expression
-                let result = eval(expression);
-
-                // Handle division by zero
                 if (result === Infinity || result === -Infinity) {
                     display.value = 'Error: Div by 0';
                     setTimeout(() => {
@@ -118,18 +120,16 @@
                     return;
                 }
 
-                // Check if result is a valid number
                 if (isNaN(result)) {
                     display.value = 'Error';
                     setTimeout(() => {
                         clearDisplay();
                     }, 2000);
                 } else {
-                    // Format the result to avoid long decimal numbers
                     if (Number.isFinite(result)) {
-                        // Round to 10 decimal places to avoid floating point precision issues
-                        result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-                        display.value = result;
+                        // Round to avoid floating point precision issues
+                        const rounded = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
+                        display.value = rounded;
                     }
                 }
             } catch (error) {
@@ -140,184 +140,27 @@
             }
         }
 
-        // Scientific functions - these now add the function to the display for expression evaluation
-        function calculateSin() {
-            try {
-                if (display.value === '') {
-                    display.value = 'sin(';
-                } else {
-                    display.value = 'sin(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateCos() {
-            try {
-                if (display.value === '') {
-                    display.value = 'cos(';
-                } else {
-                    display.value = 'cos(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateTan() {
-            try {
-                if (display.value === '') {
-                    display.value = 'tan(';
-                } else {
-                    display.value = 'tan(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateLog() {
-            try {
-                if (display.value === '') {
-                    display.value = 'log(';
-                } else {
-                    display.value = 'log(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateLn() {
-            try {
-                if (display.value === '') {
-                    display.value = 'ln(';
-                } else {
-                    display.value = 'ln(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateSqrt() {
-            try {
-                if (display.value === '') {
-                    display.value = 'sqrt(';
-                } else {
-                    display.value = 'sqrt(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculatePower() {
-            try {
-                display.value += '**';
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculateExp() {
-            try {
-                if (display.value === '') {
-                    display.value = 'exp(';
-                } else {
-                    display.value = 'exp(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        function calculatePi() {
-            display.value += 'PI';
-        }
-
-        function calculateE() {
-            display.value += 'E';
-        }
-
-        function calculateFactorial() {
-            try {
-                display.value += '!';
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
         function calculateSquare() {
-            try {
-                if (display.value === '') {
-                    display.value = '**2';
-                } else {
-                    display.value = '(' + display.value + ')**2';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
+            if (display.value === '') {
+                display.value = '**2';
+            } else {
+                display.value = '(' + display.value + ')**2';
             }
         }
 
         function calculateCube() {
-            try {
-                if (display.value === '') {
-                    display.value = '**3';
-                } else {
-                    display.value = '(' + display.value + ')**3';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
+            if (display.value === '') {
+                display.value = '**3';
+            } else {
+                display.value = '(' + display.value + ')**3';
             }
         }
 
         function calculateInverse() {
-            try {
-                if (display.value === '') {
-                    display.value = '1/';
-                } else {
-                    display.value = '1/(' + display.value + ')';
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
+            if (display.value === '') {
+                display.value = '**-1';
+            } else {
+                display.value = '1/(' + display.value + ')';
             }
         }
 
