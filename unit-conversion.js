@@ -6,8 +6,7 @@ function convertLength() {
     const resultSpan = document.getElementById('length-result');
 
     const meters = input * getMeterMultiplier(fromUnit);
-    const result = meters / getMeterMultiplier(toUnit);
-    resultSpan.textContent = `Result: ${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(2)}`;
 }
 
 function getMeterMultiplier(unit) {
@@ -33,7 +32,7 @@ function convertWeight() {
 
     const grams = input * getGramMultiplier(fromUnit);
     const result = grams / getGramMultiplier(toUnit);
-        resultSpan.textContent = `Result: ${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(2)}`;
 }
 
 function getGramMultiplier(unit) {
@@ -57,7 +56,7 @@ function convertVolume() {
     const liters = input * getLiterMultiplier(fromUnit);
     const result = liters / getLiterMultiplier(toUnit);
 
-    resultSpan.textContent = `Result: ${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(2)}`;
 }
 
 function getLiterMultiplier(unit) {
