@@ -1,2 +1,4 @@
 *.html.backup
 *.html.backup2
+setting.json
+.vscode/settings.json
