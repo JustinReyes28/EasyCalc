@@ -25,7 +25,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 20px;
     color: var(--light-color); /* Default text color */
 }
@@ -39,6 +38,7 @@ body {
     backdrop-filter: blur(10px); /* Frosted glass effect */
     max-width: 600px;
     width: 100%;
+    margin: auto; /* Center the container vertically */
 }
 
 h1 {
