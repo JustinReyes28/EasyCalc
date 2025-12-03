@@ -24,8 +24,8 @@ body {
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
     color: var(--light-color); /* Default text color */
 }
@@ -181,4 +181,34 @@ h1 {
     #gwa-result {
         font-size: 1.5rem;
     }
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.footer-left p {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
