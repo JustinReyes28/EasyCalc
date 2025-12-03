@@ -69,7 +69,7 @@ h1 {
 .gwa-calculator-content {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: var(--dark-color);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: var(--border-radius);
 }
 
