@@ -7,141 +7,147 @@
     <link rel="stylesheet" href="unit-conversion.css">
 </head>
 <body>
-    <div class="converter-container">
-        <h1>Unit Conversion</h1>
+    <div class="calculator-container">
+        <header>
+            <h1>Unit Conversion</h1>
+            <p>Convert between various units of measurement</p>
+        </header>
 
-        <!-- Length Conversion -->
-        <div class="converter">
-            <h2>Length</h2>
-            <div class="input-group">
-                <label for="length-input">Value:</label>
-                <input type="number" id="length-input" placeholder="Enter length">
+        <div class="calculator-grid">
+            <!-- Length Conversion Card -->
+            <div class="calculator-card">
+                <h3>Length Converter</h3>
+                <div class="input-group">
+                    <label for="length-input">Value:</label>
+                    <input type="number" id="length-input" placeholder="Enter length">
+                </div>
+                <div class="input-group">
+                    <label for="from-length-unit">From:</label>
+                    <select id="from-length-unit">
+                        <option value="m">Meter</option>
+                        <option value="km">Kilometer</option>
+                        <option value="cm">Centimeter</option>
+                        <option value="mm">Millimeter</option>
+                        <option value="mi">Mile</option>
+                        <option value="yd">Yard</option>
+                        <option value="ft">Foot</option>
+                        <option value="in">Inch</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-length-unit">To:</label>
+                    <select id="to-length-unit">
+                        <option value="m">Meter</option>
+                        <option value="km">Kilometer</option>
+                        <option value="cm">Centimeter</option>
+                        <option value="mm">Millimeter</option>
+                        <option value="mi">Mile</option>
+                        <option value="yd">Yard</option>
+                        <option value="ft">Foot</option>
+                        <option value="in">Inch</option>
+                    </select>
+                </div>
+                <button onclick="convertLength()">Convert</button>
+                <div class="result" id="length-result">Result: 0.00000</div>
             </div>
-            <div class="input-group">
-                <label for="from-length-unit">From:</label>
-                <select id="from-length-unit">
-                    <option value="m">Meter</option>
-                    <option value="km">Kilometer</option>
-                    <option value="cm">Centimeter</option>
-                    <option value="mm">Millimeter</option>
-                    <option value="mi">Mile</option>
-                    <option value="yd">Yard</option>
-                    <option value="ft">Foot</option>
-                    <option value="in">Inch</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="to-length-unit">To:</label>
-                <select id="to-length-unit">
-                    <option value="m">Meter</option>
-                    <option value="km">Kilometer</option>
-                    <option value="cm">Centimeter</option>
-                    <option value="mm">Millimeter</option>
-                    <option value="mi">Mile</option>
-                    <option value="yd">Yard</option>
-                    <option value="ft">Foot</option>
-                    <option value="in">Inch</option>
-                </select>
-            </div>
-            <button class="btn operator" onclick="convertLength()">Convert</button>
-                        <div class="result">Result: <span id="length-result"></span></div>
-        </div>
 
-        <!-- Weight Conversion -->
-        <div class="converter">
-            <h2>Weight</h2>
-            <div class="input-group">
-                <label for="weight-input">Value:</label>
-                <input type="number" id="weight-input" placeholder="Enter weight">
+            <!-- Weight Conversion Card -->
+            <div class="calculator-card">
+                <h3>Weight Converter</h3>
+                <div class="input-group">
+                    <label for="weight-input">Value:</label>
+                    <input type="number" id="weight-input" placeholder="Enter weight">
+                </div>
+                <div class="input-group">
+                    <label for="from-weight-unit">From:</label>
+                    <select id="from-weight-unit">
+                        <option value="kg">Kilogram</option>
+                        <option value="g">Gram</option>
+                        <option value="mg">Milligram</option>
+                        <option value="lb">Pound</option>
+                        <option value="oz">Ounce</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-weight-unit">To:</label>
+                    <select id="to-weight-unit">
+                        <option value="kg">Kilogram</option>
+                        <option value="g">Gram</option>
+                        <option value="mg">Milligram</option>
+                        <option value="lb">Pound</option>
+                        <option value="oz">Ounce</option>
+                    </select>
+                </div>
+                <button onclick="convertWeight()">Convert</button>
+                <div class="result" id="weight-result">Result: 0.00000</div>
             </div>
-            <div class="input-group">
-                <label for="from-weight-unit">From:</label>
-                <select id="from-weight-unit">
-                    <option value="kg">Kilogram</option>
-                    <option value="g">Gram</option>
-                    <option value="mg">Milligram</option>
-                    <option value="lb">Pound</option>
-                    <option value="oz">Ounce</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="to-weight-unit">To:</label>
-                <select id="to-weight-unit">
-                    <option value="kg">Kilogram</option>
-                    <option value="g">Gram</option>
-                    <option value="mg">Milligram</option>
-                    <option value="lb">Pound</option>
-                    <option value="oz">Ounce</option>
-                </select>
-            </div>
-            <button class="btn operator" onclick="convertWeight()">Convert</button>
-                        <div class="result">Result: <span id="weight-result"></span></div>
-        </div>
 
-        <!-- Volume Conversion -->
-        <div class="converter">
-            <h2>Volume</h2>
-            <div class="input-group">
-                <label for="volume-input">Value:</label>
-                <input type="number" id="volume-input" placeholder="Enter volume">
+            <!-- Volume Conversion Card -->
+            <div class="calculator-card">
+                <h3>Volume Converter</h3>
+                <div class="input-group">
+                    <label for="volume-input">Value:</label>
+                    <input type="number" id="volume-input" placeholder="Enter volume">
+                </div>
+                <div class="input-group">
+                    <label for="from-volume-unit">From:</label>
+                    <select id="from-volume-unit">
+                        <option value="l">Liter</option>
+                        <option value="ml">Milliliter</option>
+                        <option value="gal">Gallon</option>
+                        <option value="qt">Quart</option>
+                        <option value="pt">Pint</option>
+                        <option value="cup">Cup</option>
+                        <option value="fl-oz">Fluid Ounce</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-volume-unit">To:</label>
+                    <select id="to-volume-unit">
+                        <option value="l">Liter</option>
+                        <option value="ml">Milliliter</option>
+                        <option value="gal">Gallon</option>
+                        <option value="qt">Quart</option>
+                        <option value="pt">Pint</option>
+                        <option value="cup">Cup</option>
+                        <option value="fl-oz">Fluid Ounce</option>
+                    </select>
+                </div>
+                <button onclick="convertVolume()">Convert</button>
+                <div class="result" id="volume-result">Result: 0.00000</div>
             </div>
-            <div class="input-group">
-                <label for="from-volume-unit">From:</label>
-                <select id="from-volume-unit">
-                    <option value="l">Liter</option>
-                    <option value="ml">Milliliter</option>
-                    <option value="gal">Gallon</option>
-                    <option value="qt">Quart</option>
-                    <option value="pt">Pint</option>
-                    <option value="cup">Cup</option>
-                    <option value="fl-oz">Fluid Ounce</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="to-volume-unit">To:</label>
-                <select id="to-volume-unit">
-                    <option value="l">Liter</option>
-                    <option value="ml">Milliliter</option>
-                    <option value="gal">Gallon</option>
-                    <option value="qt">Quart</option>
-                    <option value="pt">Pint</option>
-                    <option value="cup">Cup</option>
-                    <option value="fl-oz">Fluid Ounce</option>
-                </select>
-            </div>
-            <button class="btn operator" onclick="convertVolume()">Convert</button>
-                        <div class="result">Result: <span id="volume-result"></span></div>
-        </div>
 
-        <!-- Temperature Conversion -->
-        <div class="converter">
-            <h2>Temperature</h2>
-            <div class="input-group">
-                <label for="temp-input">Value:</label>
-                <input type="number" id="temp-input" placeholder="Enter temperature">
+            <!-- Temperature Conversion Card -->
+            <div class="calculator-card">
+                <h3>Temperature Converter</h3>
+                <div class="input-group">
+                    <label for="temp-input">Value:</label>
+                    <input type="number" id="temp-input" placeholder="Enter temperature">
+                </div>
+                <div class="input-group">
+                    <label for="from-temp-unit">From:</label>
+                    <select id="from-temp-unit">
+                        <option value="c">Celsius</option>
+                        <option value="f">Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-temp-unit">To:</label>
+                    <select id="to-temp-unit">
+                        <option value="c">Celsius</option>
+                        <option value="f">Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </div>
+                <button onclick="convertTemperature()">Convert</button>
+                <div class="result" id="temp-result">Result: 0.00000</div>
             </div>
-            <div class="input-group">
-                <label for="from-temp-unit">From:</label>
-                <select id="from-temp-unit">
-                    <option value="c">Celsius</option>
-                    <option value="f">Fahrenheit</option>
-                    <option value="k">Kelvin</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="to-temp-unit">To:</label>
-                <select id="to-temp-unit">
-                    <option value="c">Celsius</option>
-                    <option value="f">Fahrenheit</option>
-                    <option value="k">Kelvin</option>
-                </select>
-            </div>
-            <button class="btn operator" onclick="convertTemperature()">Convert</button>
-                        <div class="result">Result: <span id="temp-result"></span></div>
         </div>
 
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>
     </div>
+
     <script src="unit-conversion.js"></script>
     <footer>
         <div class="footer-content">
