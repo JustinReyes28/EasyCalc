@@ -1,6 +1,7 @@
-[Live Demo](https://justinreyes28.github.io/EasyCalc/)
-
 # EasyCalc
+
+### Live Demo
+Experience EasyCalc live: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
 
 A simple, user-friendly calculator built with HTML, CSS, and JavaScript.
 
@@ -65,5 +66,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Your Name - JustinReyes28@proton.me
-
-Project Link: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
