@@ -12,7 +12,7 @@ function convertLength() {
 
     const meters = parseFloat(input) * getMeterMultiplier(fromUnit);
     const result = meters / getMeterMultiplier(toUnit);
-    resultSpan.textContent = `${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(5)}`;
 }
 
 function getMeterMultiplier(unit) {
@@ -43,7 +43,7 @@ function convertWeight() {
 
     const grams = parseFloat(input) * getGramMultiplier(fromUnit);
     const result = grams / getGramMultiplier(toUnit);
-    resultSpan.textContent = `${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(5)}`;
 }
 
 function getGramMultiplier(unit) {
@@ -72,7 +72,7 @@ function convertVolume() {
     const liters = parseFloat(input) * getLiterMultiplier(fromUnit);
     const result = liters / getLiterMultiplier(toUnit);
 
-    resultSpan.textContent = `${result.toFixed(2)}`;
+    resultSpan.textContent = `${result.toFixed(5)}`;
 }
 
 function getLiterMultiplier(unit) {
@@ -125,5 +125,5 @@ function convertTemperature() {
         }
     }
 
-    resultSpan.textContent = result.toFixed(2);
+    resultSpan.textContent = result.toFixed(5);
 }
