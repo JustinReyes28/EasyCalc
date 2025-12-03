@@ -3,16 +3,16 @@ function convertLength() {
     const input = document.getElementById('length-input').value;
     const fromUnit = document.getElementById('from-length-unit').value;
     const toUnit = document.getElementById('to-length-unit').value;
-    const resultSpan = document.getElementById('length-result');
+    const resultContainer = document.querySelector('#length-result').closest('.result');
 
     if (input === '') {
-        resultSpan.textContent = '0';
+        resultContainer.textContent = 'Result: 0.00000';
         return;
     }
 
     const meters = parseFloat(input) * getMeterMultiplier(fromUnit);
     const result = meters / getMeterMultiplier(toUnit);
-    resultSpan.textContent = `${result.toFixed(5)}`;
+    resultContainer.textContent = `Result: ${result.toFixed(5)}`;
 }
 
 function getMeterMultiplier(unit) {
@@ -34,16 +34,16 @@ function convertWeight() {
     const input = document.getElementById('weight-input').value;
     const fromUnit = document.getElementById('from-weight-unit').value;
     const toUnit = document.getElementById('to-weight-unit').value;
-    const resultSpan = document.getElementById('weight-result');
+    const resultContainer = document.querySelector('#weight-result').closest('.result');
 
     if (input === '') {
-        resultSpan.textContent = '0';
+        resultContainer.textContent = 'Result: 0.00000';
         return;
     }
 
     const grams = parseFloat(input) * getGramMultiplier(fromUnit);
     const result = grams / getGramMultiplier(toUnit);
-    resultSpan.textContent = `${result.toFixed(5)}`;
+    resultContainer.textContent = `Result: ${result.toFixed(5)}`;
 }
 
 function getGramMultiplier(unit) {
@@ -62,17 +62,17 @@ function convertVolume() {
     const input = document.getElementById('volume-input').value;
     const fromUnit = document.getElementById('from-volume-unit').value;
     const toUnit = document.getElementById('to-volume-unit').value;
-    const resultSpan = document.getElementById('volume-result');
+    const resultContainer = document.querySelector('#volume-result').closest('.result');
 
     if (input === '') {
-        resultSpan.textContent = '0';
+        resultContainer.textContent = 'Result: 0.00000';
         return;
     }
 
     const liters = parseFloat(input) * getLiterMultiplier(fromUnit);
     const result = liters / getLiterMultiplier(toUnit);
 
-    resultSpan.textContent = `${result.toFixed(5)}`;
+    resultContainer.textContent = `Result: ${result.toFixed(5)}`;
 }
 
 function getLiterMultiplier(unit) {
@@ -93,10 +93,10 @@ function convertTemperature() {
     const inputStr = document.getElementById('temp-input').value;
     const fromUnit = document.getElementById('from-temp-unit').value;
     const toUnit = document.getElementById('to-temp-unit').value;
-    const resultSpan = document.getElementById('temp-result');
+    const resultContainer = document.querySelector('#temp-result').closest('.result');
 
     if (inputStr === '') {
-        resultSpan.textContent = '0';
+        resultContainer.textContent = 'Result: 0.00000';
         return;
     }
 
@@ -125,5 +125,5 @@ function convertTemperature() {
         }
     }
 
-    resultSpan.textContent = result.toFixed(5);
+    resultContainer.textContent = `Result: ${result.toFixed(5)}`;
 }
