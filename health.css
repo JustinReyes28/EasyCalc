@@ -24,7 +24,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 20px;
     color: var(--light-color);
 }
@@ -38,6 +37,7 @@ body {
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(10px);
+    margin: auto; /* Center the container vertically */
 }
 
 header h1 {
