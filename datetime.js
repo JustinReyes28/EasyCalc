@@ -7,7 +7,60 @@ window.onload = function() {
             input.value = today;
         }
     });
+    populateTimezones();
 };
+
+function populateTimezones() {
+    const fromTimezone = document.getElementById('from-timezone');
+    const toTimezone = document.getElementById('to-timezone');
+    const timezones = Intl.supportedValuesOf('timeZone');
+    
+    timezones.forEach(zone => {
+        const option1 = document.createElement('option');
+        option1.value = zone;
+        option1.textContent = zone;
+        fromTimezone.appendChild(option1);
+        
+        const option2 = document.createElement('option');
+        option2.value = zone;
+        option2.textContent = zone;
+        toTimezone.appendChild(option2);
+    });
+
+    // Set default values
+    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    fromTimezone.value = localTimezone;
+    toTimezone.value = 'UTC';
+}
+
+function convertTimezone() {
+    const fromTimezone = document.getElementById('from-timezone').value;
+    const toTimezone = document.getElementById('to-timezone').value;
+    const resultDiv = document.getElementById('timezone-result');
+
+    const now = new Date();
+    const fromTime = now.toLocaleString("en-US", {timeZone: fromTimezone, hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false});
+    const toTime = now.toLocaleString("en-US", {timeZone: toTimezone, hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false});
+
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `Current time in ${fromTimezone} is ${fromTime}.<br>Current time in ${toTimezone} is ${toTime}.`;
+}
+
+function filterTimezones(type) {
+    const searchInput = document.getElementById(`${type}-timezone-search`);
+    const selectElement = document.getElementById(`${type}-timezone`);
+    const filter = searchInput.value.toUpperCase();
+    const options = selectElement.getElementsByTagName('option');
+
+    for (let i = 0; i < options.length; i++) {
+        const txtValue = options[i].textContent || options[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            options[i].style.display = "";
+        } else {
+            options[i].style.display = "none";
+        }
+    }
+}
 
 function calculateDateDifference() {
     const startDate = new Date(document.getElementById('start-date').value);
