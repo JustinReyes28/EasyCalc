@@ -107,10 +107,14 @@
             <div class="calculator-card">
                 <h3>Time Zone Converter</h3>
                 <div class="input-group">
+                    <label for="from-timezone-search">Search From Timezone:</label>
+                    <input type="text" id="from-timezone-search" onkeyup="filterTimezones('from')" placeholder="Search...">
                     <label for="from-timezone">From Timezone:</label>
                     <select id="from-timezone"></select>
                 </div>
                 <div class="input-group">
+                    <label for="to-timezone-search">Search To Timezone:</label>
+                    <input type="text" id="to-timezone-search" onkeyup="filterTimezones('to')" placeholder="Search...">
                     <label for="to-timezone">To Timezone:</label>
                     <select id="to-timezone"></select>
                 </div>

@@ -46,6 +46,22 @@ function convertTimezone() {
     resultDiv.innerHTML = `Current time in ${fromTimezone} is ${fromTime}.<br>Current time in ${toTimezone} is ${toTime}.`;
 }
 
+function filterTimezones(type) {
+    const searchInput = document.getElementById(`${type}-timezone-search`);
+    const selectElement = document.getElementById(`${type}-timezone`);
+    const filter = searchInput.value.toUpperCase();
+    const options = selectElement.getElementsByTagName('option');
+
+    for (let i = 0; i < options.length; i++) {
+        const txtValue = options[i].textContent || options[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            options[i].style.display = "";
+        } else {
+            options[i].style.display = "none";
+        }
+    }
+}
+
 function calculateDateDifference() {
     const startDate = new Date(document.getElementById('start-date').value);
     const endDate = new Date(document.getElementById('end-date').value);
