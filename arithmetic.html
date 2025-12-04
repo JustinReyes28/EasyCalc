@@ -40,6 +40,8 @@
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>
     </div>
 
+    <!-- Include math.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.0/math.min.js"></script>
     <script>
         let display = document.getElementById('display');
 
@@ -59,7 +61,9 @@
             try {
                 // Replace × with * and ÷ with / in the expression before evaluating
                 let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-                let result = eval(expression);
+
+                // Use math.js to evaluate the expression safely
+                let result = math.evaluate(expression);
 
                 // Handle division by zero
                 if (result === Infinity || result === -Infinity) {
