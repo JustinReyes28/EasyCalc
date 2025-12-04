@@ -24,8 +24,7 @@ body {
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     padding: 20px;
     color: var(--light-color); /* Default text color */
 }
@@ -39,6 +38,7 @@ body {
     backdrop-filter: blur(10px); /* Frosted glass effect */
     max-width: 600px;
     width: 100%;
+    margin: auto; /* Center the container vertically */
 }
 
 h1 {
@@ -69,7 +69,7 @@ h1 {
 .gwa-calculator-content {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--dark-color);
     border-radius: var(--border-radius);
 }
 
@@ -79,6 +79,14 @@ h1 {
     margin-bottom: 10px;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .course-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
 }
 
 .course-row input {
@@ -153,32 +161,111 @@ h1 {
 }
 
 /* Responsive Design for smaller screens */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .calculator-container {
         padding: 1rem;
+        margin: 10px;
     }
 
     h1 {
         font-size: 2rem;
     }
 
+    .gwa-calculator-content {
+        padding: 1rem;
+    }
+
     .course-row {
         flex-direction: column;
-        gap: 5px;
+        align-items: stretch;
     }
 
     .course-row input,
     .course-row button {
         width: 100%;
+        margin: 2px 0;
     }
 
     #add-course-btn,
     #calculate-gwa-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
+        padding: 10px 15px;
+        margin: 8px 0;
+        font-size: 1rem;
+        width: 100%;
     }
 
     #gwa-result {
         font-size: 1.5rem;
     }
+
+    .back-link {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 0.8rem;
+        margin: 8px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .course-row {
+        gap: 6px;
+    }
+
+    .course-row input,
+    .course-row button {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    #add-course-btn,
+    #calculate-gwa-btn {
+        padding: 9px 12px;
+        font-size: 0.9rem;
+    }
+
+    #gwa-result {
+        font-size: 1.3rem;
+    }
+
+    .back-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.footer-left p {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }

@@ -8,18 +8,26 @@
 </head>
 <body class="gwa-page">
     <div class="calculator-container">
-        <h1>GWA Calculator</h1>
-        <div class="gwa-calculator-content">
-            <div id="course-inputs">
-                <div class="course-row">
-                    <input type="number" class="grade-input" placeholder="Grade (e.g., 1.0, 3.0)" step="0.01">
-                    <input type="number" class="units-input" placeholder="Units (e.g., 3, 1)" step="0.5">
-                    <button class="remove-course-btn" style="display:none;">-</button>
+        <header>
+            <h1>GWA Calculator</h1>
+            <p>Calculate your General Weighted Average</p>
+        </header>
+        <div class="calculator-grid">
+            <div class="calculator-card">
+                <h3>Add Courses</h3>
+                <div class="course-inputs-container">
+                    <div id="course-inputs">
+                        <div class="course-row">
+                            <input type="number" class="grade-input" placeholder="Grade (e.g., 1.0, 3.0)" step="0.01">
+                            <input type="number" class="units-input" placeholder="Units (e.g., 3, 1)" step="0.5">
+                            <button class="remove-course-btn" style="display:none;">-</button>
+                        </div>
+                    </div>
+                    <button id="add-course-btn">Add Course</button>
+                    <button id="calculate-gwa-btn">Calculate GWA</button>
                 </div>
+                <div class="result" id="gwa-result">Your GWA will appear here</div>
             </div>
-            <button id="add-course-btn">Add Course</button>
-            <button id="calculate-gwa-btn">Calculate GWA</button>
-            <div id="gwa-result"></div>
         </div>
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>
     </div>
