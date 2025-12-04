@@ -143,6 +143,47 @@
                 <button onclick="convertTemperature()">Convert</button>
                 <div class="result" id="temp-result">Result: 0.00000</div>
             </div>
+
+            <!-- Time Conversion Card -->
+            <div class="calculator-card">
+                <h3>Time Converter</h3>
+                <div class="input-group">
+                    <label for="time-input">Value:</label>
+                    <input type="number" id="time-input" placeholder="Enter time">
+                </div>
+                <div class="input-group">
+                    <label for="from-time-unit">From:</label>
+                    <select id="from-time-unit">
+                        <option value="ns">Nanosecond</option>
+                        <option value="μs">Microsecond</option>
+                        <option value="ms">Millisecond</option>
+                        <option value="s">Second</option>
+                        <option value="min">Minute</option>
+                        <option value="hr">Hour</option>
+                        <option value="day">Day</option>
+                        <option value="wk">Week</option>
+                        <option value="mo">Month</option>
+                        <option value="yr">Year</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-time-unit">To:</label>
+                    <select id="to-time-unit">
+                        <option value="ns">Nanosecond</option>
+                        <option value="μs">Microsecond</option>
+                        <option value="ms">Millisecond</option>
+                        <option value="s">Second</option>
+                        <option value="min">Minute</option>
+                        <option value="hr">Hour</option>
+                        <option value="day">Day</option>
+                        <option value="wk">Week</option>
+                        <option value="mo">Month</option>
+                        <option value="yr">Year</option>
+                    </select>
+                </div>
+                <button onclick="convertTime()">Convert</button>
+                <div class="result" id="time-result">Result: 0.00000</div>
+            </div>
         </div>
 
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>

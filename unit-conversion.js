@@ -127,3 +127,36 @@ function convertTemperature() {
 
     resultContainer.textContent = `Result: ${result.toFixed(5)}`;
 }
+
+// Time Conversion
+function convertTime() {
+    const input = document.getElementById('time-input').value;
+    const fromUnit = document.getElementById('from-time-unit').value;
+    const toUnit = document.getElementById('to-time-unit').value;
+    const resultContainer = document.querySelector('#time-result').closest('.result');
+
+    if (input === '') {
+        resultContainer.textContent = 'Result: 0.00000';
+        return;
+    }
+
+    const seconds = parseFloat(input) * getSecondMultiplier(fromUnit);
+    const result = seconds / getSecondMultiplier(toUnit);
+    resultContainer.textContent = `Result: ${result.toFixed(5)}`;
+}
+
+function getSecondMultiplier(unit) {
+    switch (unit) {
+        case 'ns': return 1e-9;      // Nanoseconds to seconds
+        case 'μs': return 1e-6;      // Microseconds to seconds
+        case 'ms': return 0.001;     // Milliseconds to seconds
+        case 's': return 1;          // Seconds
+        case 'min': return 60;       // Minutes to seconds
+        case 'hr': return 3600;      // Hours to seconds
+        case 'day': return 86400;    // Days to seconds (24*60*60)
+        case 'wk': return 604800;    // Weeks to seconds (7*24*60*60)
+        case 'mo': return 2628000;   // Months to seconds (30.44*24*60*60, average)
+        case 'yr': return 31536000;  // Years to seconds (365*24*60*60)
+        default: return 1;
+    }
+}
