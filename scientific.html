@@ -59,6 +59,8 @@
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>
     </div>
 
+    <!-- Include math.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.0/math.min.js"></script>
     <script>
         let display = document.getElementById('display');
 
@@ -82,35 +84,36 @@
 
         function calculate() {
             try {
-                // Create a sandboxed evaluation environment
-                const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
+                // Prepare the expression for math.js evaluation
+                let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
 
-                // Create a self-evaluating function that includes our custom functions
-                const result = new Function(`
-                    "use strict";
-                    const sinDeg = (x) => Math.sin(x * Math.PI / 180);
-                    const cosDeg = (x) => Math.cos(x * Math.PI / 180);
-                    const tanDeg = (x) => Math.tan(x * Math.PI / 180);
-                    const factorial = (n) => {
-                        if (n < 0 || !Number.isInteger(n)) return NaN;
-                        let result = 1;
-                        for (let i = 2; i <= n; i++) result *= i;
-                        return result;
-                    };
+                // Replace math functions with math.js equivalents
+                // In math.js, we need to use degSin, degCos, degTan for degree-based trigonometric functions
+                expression = expression.replace(/sin\(/g, 'sin(');  // We'll handle degrees in the configuration
+                expression = expression.replace(/cos\(/g, 'cos(');
+                expression = expression.replace(/tan\(/g, 'tan(');
+                expression = expression.replace(/log\(/g, 'log10(');
+                expression = expression.replace(/ln\(/g, 'log(');
+                expression = expression.replace(/sqrt\(/g, 'sqrt(');
+                expression = expression.replace(/exp\(/g, 'exp(');
 
-                    // Build the expression string with all replacements
-                    let expr = \`${expression.replace(/[`\\]/g, '\\$&')}\`;
-                    expr = expr.replace(/sin\\(/g, 'sinDeg(');
-                    expr = expr.replace(/cos\\(/g, 'cosDeg(');
-                    expr = expr.replace(/tan\\(/g, 'tanDeg(');
-                    expr = expr.replace(/log\\(/g, 'Math.log10(');
-                    expr = expr.replace(/ln\\(/g, 'Math.log(');
-                    expr = expr.replace(/sqrt\\(/g, 'Math.sqrt(');
-                    expr = expr.replace(/exp\\(/g, 'Math.exp(');
-                    expr = expr.replace(/(\\d+(?:\\.\\d+)?)!/g, 'factorial($1)');
+                // Handle factorial (n!) by replacing with factorial(n)
+                expression = expression.replace(/(\d+(?:\.\d+)?)!/g, 'factorial($1)');
 
-                    return eval(expr);
-                `)();
+                // Create a custom math.js instance with degrees as default for trigonometric functions
+                const mathConfig = math.create({
+                    number: 'number',
+                    precision: 64
+                });
+
+                // For calculator behavior (using degrees), we'll make a custom evaluation
+                // First, let's handle the trigonometric functions to work with degrees by converting to radians
+                expression = expression.replace(/sin\(([^)]+)\)/g, 'sin($1 * pi / 180)');
+                expression = expression.replace(/cos\(([^)]+)\)/g, 'cos($1 * pi / 180)');
+                expression = expression.replace(/tan\(([^)]+)\)/g, 'tan($1 * pi / 180)');
+
+                // Use math.js to evaluate the expression safely
+                const result = mathConfig.evaluate(expression);
 
                 if (result === Infinity || result === -Infinity) {
                     display.value = 'Error: Div by 0';
