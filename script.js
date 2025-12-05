@@ -336,6 +336,20 @@ document.addEventListener('DOMContentLoaded', function() {
         calculateGwaBtn.addEventListener('click', calculateGWA);
         clearHistoryBtn.addEventListener('click', clearHistory);
 
+        courseInputs.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const target = event.target;
+                const inputs = Array.from(courseInputs.querySelectorAll('.grade-input, .units-input'));
+                const currentIndex = inputs.indexOf(target);
+
+                if (currentIndex > -1 && currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                } else if (currentIndex === inputs.length - 1) {
+                    calculateGWA();
+                }
+            }
+        });
+
         // Event delegation for remove buttons
         courseInputs.addEventListener('click', function(event) {
             if (event.target.classList.contains('remove-course-btn')) {

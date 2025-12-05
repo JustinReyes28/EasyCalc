@@ -160,3 +160,31 @@ function getSecondMultiplier(unit) {
         default: return 1;
     }
 }
+
+window.onload = function() {
+    document.getElementById('length-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertLength();
+        }
+    });
+    document.getElementById('weight-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertWeight();
+        }
+    });
+    document.getElementById('volume-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertVolume();
+        }
+    });
+    document.getElementById('temp-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertTemperature();
+        }
+    });
+    document.getElementById('time-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertTime();
+        }
+    });
+};
