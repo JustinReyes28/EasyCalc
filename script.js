@@ -1,7 +1,7 @@
 // Add fade-in effect after page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Wait for a brief moment before starting the fade-in
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the logo
         const logoContainer = document.querySelector('.logo-container');
         if (logoContainer) {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             logoContainer.style.transition = 'opacity 0.5s ease-out';
 
             // After logo fades out, show the content
-            setTimeout(function() {
+            setTimeout(function () {
                 logoContainer.style.display = 'none';
 
                 // Show the content
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // GWA Calculator Logic
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (document.body.classList.contains('gwa-page')) {
         const courseInputs = document.getElementById('course-inputs');
         const addCourseBtn = document.getElementById('add-course-btn');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const GWA_HISTORY_KEY = 'gwaCalculatorHistory';
 
         // Load saved data from Local Storage on page load
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             loadCourseDataFromStorage();
             loadAndDisplayHistory();
         });
@@ -84,11 +84,29 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Add new rows for additional courses
                             const courseRow = document.createElement('div');
                             courseRow.classList.add('course-row');
-                            courseRow.innerHTML = `
-                                <input type="number" class="grade-input" placeholder="Grade (e.g., 1.0, 3.0)" step="0.01" value="${course.grade}">
-                                <input type="number" class="units-input" placeholder="Units (e.g., 3, 1)" step="0.5" value="${course.units}">
-                                <button class="remove-course-btn">-</button>
-                            `;
+
+                            const gradeInput = document.createElement('input');
+                            gradeInput.type = 'number';
+                            gradeInput.className = 'grade-input';
+                            gradeInput.placeholder = 'Grade (e.g., 1.0, 3.0)';
+                            gradeInput.step = '0.01';
+                            gradeInput.value = course.grade;
+
+                            const unitsInput = document.createElement('input');
+                            unitsInput.type = 'number';
+                            unitsInput.className = 'units-input';
+                            unitsInput.placeholder = 'Units (e.g., 3, 1)';
+                            unitsInput.step = '0.5';
+                            unitsInput.value = course.units;
+
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-course-btn';
+                            removeBtn.textContent = '-';
+
+                            courseRow.appendChild(gradeInput);
+                            courseRow.appendChild(unitsInput);
+                            courseRow.appendChild(removeBtn);
+
                             courseInputs.appendChild(courseRow);
                         }
                     });
@@ -153,37 +171,72 @@ document.addEventListener('DOMContentLoaded', function() {
         function createHistoryItemElement(item) {
             const historyItem = document.createElement('div');
             historyItem.className = 'history-item';
-            historyItem.innerHTML = `
-                <div class="history-item-header">
-                    <span class="history-item-title">GWA: ${item.gwa.toFixed(2)}</span>
-                    <span class="history-item-timestamp">${item.timestamp}</span>
-                </div>
-                <div class="history-item-courses">
-                    ${item.courses.map(course => `
-                        <div class="history-item-course">
-                            <span class="history-item-course-grade">Grade: ${course.grade}</span>
-                            <span class="history-item-course-units">Units: ${course.units}</span>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="history-item-gwa">
-                    ${item.gwa < 1.50 ? 'University Scholar!' : item.gwa < 1.75 ? 'College Scholar!' : 'Great Job!'}
-                </div>
-                <div class="history-actions">
-                    <button class="history-btn load-history-btn" data-id="${item.id}">Load</button>
-                    <button class="history-btn delete-history-btn" data-id="${item.id}">Delete</button>
-                </div>
-            `;
+            const header = document.createElement('div');
+            header.className = 'history-item-header';
+
+            const title = document.createElement('span');
+            title.className = 'history-item-title';
+            title.textContent = `GWA: ${item.gwa.toFixed(2)}`;
+
+            const timestamp = document.createElement('span');
+            timestamp.className = 'history-item-timestamp';
+            timestamp.textContent = item.timestamp;
+
+            header.appendChild(title);
+            header.appendChild(timestamp);
+
+            const coursesDiv = document.createElement('div');
+            coursesDiv.className = 'history-item-courses';
+
+            item.courses.forEach(course => {
+                const courseDiv = document.createElement('div');
+                courseDiv.className = 'history-item-course';
+
+                const gradeSpan = document.createElement('span');
+                gradeSpan.className = 'history-item-course-grade';
+                gradeSpan.textContent = `Grade: ${course.grade}`;
+
+                const unitsSpan = document.createElement('span');
+                unitsSpan.className = 'history-item-course-units';
+                unitsSpan.textContent = `Units: ${course.units}`;
+
+                courseDiv.appendChild(gradeSpan);
+                courseDiv.appendChild(unitsSpan);
+                coursesDiv.appendChild(courseDiv);
+            });
+
+            const gwaDiv = document.createElement('div');
+            gwaDiv.className = 'history-item-gwa';
+            gwaDiv.textContent = item.gwa < 1.50 ? 'University Scholar!' : item.gwa < 1.75 ? 'College Scholar!' : 'Great Job!';
+
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'history-actions';
+
+            const loadBtn = document.createElement('button');
+            loadBtn.className = 'history-btn load-history-btn';
+            loadBtn.dataset.id = item.id;
+            loadBtn.textContent = 'Load';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'history-btn delete-history-btn';
+            deleteBtn.dataset.id = item.id;
+            deleteBtn.textContent = 'Delete';
+
+            actionsDiv.appendChild(loadBtn);
+            actionsDiv.appendChild(deleteBtn);
+
+            historyItem.appendChild(header);
+            historyItem.appendChild(coursesDiv);
+            historyItem.appendChild(gwaDiv);
+            historyItem.appendChild(actionsDiv);
 
             // Add event listeners for the buttons
-            const loadBtn = historyItem.querySelector('.load-history-btn');
-            const deleteBtn = historyItem.querySelector('.delete-history-btn');
 
-            loadBtn.addEventListener('click', function() {
+            loadBtn.addEventListener('click', function () {
                 loadHistoryItem(item);
             });
 
-            deleteBtn.addEventListener('click', function() {
+            deleteBtn.addEventListener('click', function () {
                 deleteHistoryItem(item.id);
             });
 
@@ -208,11 +261,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Add new rows for additional courses
                     const courseRow = document.createElement('div');
                     courseRow.classList.add('course-row');
-                    courseRow.innerHTML = `
-                        <input type="number" class="grade-input" placeholder="Grade (e.g., 1.0, 3.0)" step="0.01" value="${course.grade}">
-                        <input type="number" class="units-input" placeholder="Units (e.g., 3, 1)" step="0.5" value="${course.units}">
-                        <button class="remove-course-btn">-</button>
-                    `;
+
+                    const gradeInput = document.createElement('input');
+                    gradeInput.type = 'number';
+                    gradeInput.className = 'grade-input';
+                    gradeInput.placeholder = 'Grade (e.g., 1.0, 3.0)';
+                    gradeInput.step = '0.01';
+                    gradeInput.value = course.grade;
+
+                    const unitsInput = document.createElement('input');
+                    unitsInput.type = 'number';
+                    unitsInput.className = 'units-input';
+                    unitsInput.placeholder = 'Units (e.g., 3, 1)';
+                    unitsInput.step = '0.5';
+                    unitsInput.value = course.units;
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-course-btn';
+                    removeBtn.textContent = '-';
+
+                    courseRow.appendChild(gradeInput);
+                    courseRow.appendChild(unitsInput);
+                    courseRow.appendChild(removeBtn);
+
                     courseInputs.appendChild(courseRow);
                 }
             });
@@ -336,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
         calculateGwaBtn.addEventListener('click', calculateGWA);
         clearHistoryBtn.addEventListener('click', clearHistory);
 
-        courseInputs.addEventListener('keydown', function(event) {
+        courseInputs.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 const target = event.target;
                 const inputs = Array.from(courseInputs.querySelectorAll('.grade-input, .units-input'));
@@ -351,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Event delegation for remove buttons
-        courseInputs.addEventListener('click', function(event) {
+        courseInputs.addEventListener('click', function (event) {
             if (event.target.classList.contains('remove-course-btn')) {
                 removeCourseRow(event);
             }
