@@ -59,6 +59,12 @@ header p {
     gap: 1.5rem;
 }
 
+@media (min-width: 769px) {
+    .calculator-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns on larger screens */
+    }
+}
+
 .calculator-card {
     background: rgba(44, 62, 80, 0.7); /* Darker card background */
     border-radius: var(--border-radius);
@@ -195,6 +201,111 @@ button:hover {
 #calculate-gwa-btn:hover {
     background-color: #27ae60;
     box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+/* History Section */
+#history-container {
+    margin: 1rem 0;
+}
+
+#no-history-message {
+    color: #bdc3c7;
+    font-style: italic;
+    margin: 1rem 0;
+}
+
+.history-item {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.history-item-title {
+    font-weight: bold;
+    color: var(--light-color);
+}
+
+.history-item-timestamp {
+    font-size: 0.8rem;
+    color: #bdc3c7;
+}
+
+.history-item-courses {
+    margin: 0.5rem 0;
+}
+
+.history-item-course {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.history-item-course:last-child {
+    border-bottom: none;
+}
+
+.history-item-course-grade,
+.history-item-course-units {
+    color: var(--light-color);
+    font-weight: 500;
+}
+
+.history-item-gwa {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    color: var(--success-color);
+    text-align: center;
+}
+
+.history-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.history-btn {
+    flex: 1;
+    margin-top: 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.load-history-btn {
+    background-color: var(--primary-color);
+}
+
+.load-history-btn:hover {
+    background-color: #2980b9;
+}
+
+.delete-history-btn {
+    background-color: var(--accent-color);
+}
+
+.delete-history-btn:hover {
+    background-color: #c0392b;
+}
+
+#clear-history-btn {
+    background-color: var(--warning-color);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#clear-history-btn:hover {
+    background-color: #e67e22;
 }
 
 #add-course-btn,

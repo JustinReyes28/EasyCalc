@@ -101,3 +101,51 @@ function calculateBMR() {
         alert("Please enter valid values for weight, height, and age.");
     }
 }
+
+window.onload = function() {
+    document.getElementById('weight').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBMI();
+        }
+    });
+    document.getElementById('height').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBMI();
+        }
+    });
+    document.getElementById('waist').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBodyFat();
+        }
+    });
+    document.getElementById('hip').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBodyFat();
+        }
+    });
+    document.getElementById('neck').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBodyFat();
+        }
+    });
+    document.getElementById('height-ideal').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateIdealWeight();
+        }
+    });
+    document.getElementById('weight-bmr').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBMR();
+        }
+    });
+    document.getElementById('height-bmr').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBMR();
+        }
+    });
+    document.getElementById('age').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateBMR();
+        }
+    });
+};

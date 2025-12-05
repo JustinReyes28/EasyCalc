@@ -167,10 +167,35 @@
             }
         }
 
-        // Allow Enter key to trigger calculation
-        display.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+
+            if (key >= '0' && key <= '9' || key === '.') {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendToDisplay(key);
+            } else if (key === '(' || key === ')') {
+                appendToDisplay(key);
+            } else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
                 calculate();
+            } else if (key === 'Backspace') {
+                backspace();
+            } else if (key.toLowerCase() === 'c') {
+                clearDisplay();
+            } else if (key.toLowerCase() === 's') {
+                appendToDisplay('sin(');
+            } else if (key.toLowerCase() === 'o') { // 'c' is for clear, so 'o' for cos
+                appendToDisplay('cos(');
+            } else if (key.toLowerCase() === 't') {
+                appendToDisplay('tan(');
+            } else if (key.toLowerCase() === 'l') {
+                appendToDisplay('log(');
+            } else if (key.toLowerCase() === 'q') {
+                appendToDisplay('sqrt(');
+            } else if (key === '^') {
+                appendToDisplay('**');
             }
         });
     </script>

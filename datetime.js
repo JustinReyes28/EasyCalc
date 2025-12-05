@@ -8,6 +8,93 @@ window.onload = function() {
         }
     });
     populateTimezones();
+
+    // Add event listeners for Enter key
+    document.getElementById('start-date').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateDateDifference();
+        }
+    });
+    document.getElementById('end-date').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateDateDifference();
+        }
+    });
+    document.getElementById('birth-date').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateAge();
+        }
+    });
+    document.getElementById('base-date').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            addSubtractDays();
+        }
+    });
+    document.getElementById('days-to-add').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            addSubtractDays();
+        }
+    });
+    document.getElementById('anniversary-date').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateCountdown();
+        }
+    });
+    document.getElementById('start-hour').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('start-minute').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('start-second').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('end-hour').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('end-minute').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('end-second').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            calculateTimeInterval();
+        }
+    });
+    document.getElementById('add-hour').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            addTime();
+        }
+    });
+    document.getElementById('add-minute').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            addTime();
+        }
+    });
+    document.getElementById('add-second').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            addTime();
+        }
+    });
+    document.getElementById('from-timezone').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertTimezone();
+        }
+    });
+    document.getElementById('to-timezone').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            convertTimezone();
+        }
+    });
 };
 
 function populateTimezones() {
