@@ -10,8 +10,32 @@ EasyCalc is a straightforward web-based calculator designed for basic arithmetic
 
 ## Features
 
-- **Basic Arithmetic Operations**: Perform addition, subtraction, multiplication, and division.
-- **Clear Functionality**: Easily clear the current input or all input.
+### Arithmetic Calculator
+- Perform basic operations: addition, subtraction, multiplication, and division.
+- Enter numbers using the number buttons.
+- Choose an operator such as +, -, *, or /.
+- Press "=" to compute the result.
+- Use "C" to clear the display.
+
+### Scientific Calculator
+- Extended functions including sin, cos, tan, log, exponent, and roots.
+- Input a value using the keypad, select a scientific function, and press "=" to view the output.
+- Clear the current entry with the reset button.
+
+### Unit Conversion
+- Convert between units in categories such as length, weight, temperature, and volume.
+- Enter a value, select the units to convert from and to, and view the converted result instantly.
+
+### GWA Calculator (General Weighted Average)
+- Calculate your academic average by entering each subject, its unit value, and the corresponding grade.
+- Add all entries to the table and click the calculate button to generate your GWA.
+
+### Health Tools
+- Includes tools such as BMI calculator and calorie estimator.
+- Provide required inputs like height, weight, or activity details and review the calculated health metrics.
+
+### General Features
+- **Clear Functionality**: Easily clear the current input or reset all entries.
 - **Responsive Design**: Adapts to different screen sizes, ensuring usability on various devices.
 - **User-Friendly Interface**: Simple and clean layout for easy navigation and operation.
 
