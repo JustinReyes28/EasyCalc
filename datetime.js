@@ -1,20 +1,6 @@
-<<<<<<< HEAD
 // Date input values are calendar dates; derive today's value in the user's local zone.
 function localDateString(date = new Date()) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-=======
-// Register service worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch((error) => {
-                console.error('Service Worker registration failed:', error);
-            });
-    });
->>>>>>> origin/main
 }
 
 // Set today as default for date inputs
