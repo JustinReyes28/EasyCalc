@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="calculator.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="calculator-engine.js" defer></script>
+    <script src="history-core.js" defer></script>
     <script src="calculator.js" defer></script>
 </head>
 <body>
@@ -68,6 +69,14 @@
                 <button type="button" class="btn equals span-five" data-action="calculate" aria-label="Calculate result">=</button>
             </div>
         </section>
+        <details class="calculation-history" id="calculation-history">
+            <summary>History <span id="history-count">(0)</span></summary>
+            <div class="history-content">
+                <button type="button" class="history-button clear-history" id="clear-history" hidden>Clear history</button>
+                <p class="history-empty" id="history-empty">No calculations yet.</p>
+                <ol class="history-list" id="history-list" aria-label="Calculation history" hidden></ol>
+            </div>
+        </details>
         <p class="keyboard-help" id="keyboard-help"><kbd>Enter</kbd> to calculate · <kbd>Esc</kbd> to clear<br><strong>log</strong> is base 10 · <strong>ln</strong> is base e · angles start in <strong>degrees</strong></p>
         <a href="index.html" class="back-link">← All calculators</a>
         <noscript><p class="noscript">Enable JavaScript to calculate.</p></noscript>

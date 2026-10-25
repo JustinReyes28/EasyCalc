@@ -15,11 +15,12 @@
 
         <div class="calculator-grid">
             <!-- Length Conversion Card -->
-            <div class="calculator-card">
-                <h3>Length Converter</h3>
+            <section class="calculator-card" data-converter="length" aria-labelledby="length-heading">
+                <h2 id="length-heading">Length</h2>
                 <div class="input-group">
                     <label for="length-input">Value:</label>
-                    <input type="number" id="length-input" placeholder="Enter length">
+                    <input type="number" step="any" inputmode="decimal" id="length-input" aria-describedby="length-feedback" placeholder="Enter length">
+                    <p class="input-feedback" id="length-feedback"></p>
                 </div>
                 <div class="input-group">
                     <label for="from-length-unit">From:</label>
@@ -47,16 +48,21 @@
                         <option value="in">Inch</option>
                     </select>
                 </div>
-                <button onclick="convertLength()">Convert</button>
-                <div class="result" id="length-result">Result: 0.00000</div>
-            </div>
+                <div class="converter-actions">
+                    <button type="button" class="swap-units" id="length-swap" aria-label="Swap length units">Swap units</button>
+                    <button type="button" class="copy-result" id="length-copy" aria-label="Copy length result" disabled>Copy result</button>
+                </div>
+                <div class="result" id="length-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Result: <span id="length-result-value">&mdash;</span><span id="length-result-unit"></span></div>
+                <p class="copy-feedback" id="length-copy-feedback" role="status"></p>
+            </section>
 
             <!-- Weight Conversion Card -->
-            <div class="calculator-card">
-                <h3>Weight Converter</h3>
+            <section class="calculator-card" data-converter="weight" aria-labelledby="weight-heading">
+                <h2 id="weight-heading">Weight</h2>
                 <div class="input-group">
                     <label for="weight-input">Value:</label>
-                    <input type="number" id="weight-input" placeholder="Enter weight">
+                    <input type="number" step="any" inputmode="decimal" id="weight-input" aria-describedby="weight-feedback" placeholder="Enter weight">
+                    <p class="input-feedback" id="weight-feedback"></p>
                 </div>
                 <div class="input-group">
                     <label for="from-weight-unit">From:</label>
@@ -78,16 +84,21 @@
                         <option value="oz">Ounce</option>
                     </select>
                 </div>
-                <button onclick="convertWeight()">Convert</button>
-                <div class="result" id="weight-result">Result: 0.00000</div>
-            </div>
+                <div class="converter-actions">
+                    <button type="button" class="swap-units" id="weight-swap" aria-label="Swap weight units">Swap units</button>
+                    <button type="button" class="copy-result" id="weight-copy" aria-label="Copy weight result" disabled>Copy result</button>
+                </div>
+                <div class="result" id="weight-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Result: <span id="weight-result-value">&mdash;</span><span id="weight-result-unit"></span></div>
+                <p class="copy-feedback" id="weight-copy-feedback" role="status"></p>
+            </section>
 
             <!-- Volume Conversion Card -->
-            <div class="calculator-card">
-                <h3>Volume Converter</h3>
+            <section class="calculator-card" data-converter="volume" aria-labelledby="volume-heading">
+                <h2 id="volume-heading">Volume</h2>
                 <div class="input-group">
                     <label for="volume-input">Value:</label>
-                    <input type="number" id="volume-input" placeholder="Enter volume">
+                    <input type="number" step="any" inputmode="decimal" id="volume-input" aria-describedby="volume-feedback" placeholder="Enter volume">
+                    <p class="input-feedback" id="volume-feedback"></p>
                 </div>
                 <div class="input-group">
                     <label for="from-volume-unit">From:</label>
@@ -113,16 +124,21 @@
                         <option value="fl-oz">Fluid Ounce</option>
                     </select>
                 </div>
-                <button onclick="convertVolume()">Convert</button>
-                <div class="result" id="volume-result">Result: 0.00000</div>
-            </div>
+                <div class="converter-actions">
+                    <button type="button" class="swap-units" id="volume-swap" aria-label="Swap volume units">Swap units</button>
+                    <button type="button" class="copy-result" id="volume-copy" aria-label="Copy volume result" disabled>Copy result</button>
+                </div>
+                <div class="result" id="volume-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Result: <span id="volume-result-value">&mdash;</span><span id="volume-result-unit"></span></div>
+                <p class="copy-feedback" id="volume-copy-feedback" role="status"></p>
+            </section>
 
             <!-- Temperature Conversion Card -->
-            <div class="calculator-card">
-                <h3>Temperature Converter</h3>
+            <section class="calculator-card" data-converter="temp" aria-labelledby="temp-heading">
+                <h2 id="temp-heading">Temperature</h2>
                 <div class="input-group">
                     <label for="temp-input">Value:</label>
-                    <input type="number" id="temp-input" placeholder="Enter temperature">
+                    <input type="number" step="any" inputmode="decimal" id="temp-input" aria-describedby="temp-feedback" placeholder="Enter temperature">
+                    <p class="input-feedback" id="temp-feedback"></p>
                 </div>
                 <div class="input-group">
                     <label for="from-temp-unit">From:</label>
@@ -140,16 +156,21 @@
                         <option value="k">Kelvin</option>
                     </select>
                 </div>
-                <button onclick="convertTemperature()">Convert</button>
-                <div class="result" id="temp-result">Result: 0.00000</div>
-            </div>
+                <div class="converter-actions">
+                    <button type="button" class="swap-units" id="temp-swap" aria-label="Swap temperature units">Swap units</button>
+                    <button type="button" class="copy-result" id="temp-copy" aria-label="Copy temperature result" disabled>Copy result</button>
+                </div>
+                <div class="result" id="temp-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Result: <span id="temp-result-value">&mdash;</span><span id="temp-result-unit"></span></div>
+                <p class="copy-feedback" id="temp-copy-feedback" role="status"></p>
+            </section>
 
             <!-- Time Conversion Card -->
-            <div class="calculator-card">
-                <h3>Time Converter</h3>
+            <section class="calculator-card" data-converter="time" aria-labelledby="time-heading">
+                <h2 id="time-heading">Time</h2>
                 <div class="input-group">
                     <label for="time-input">Value:</label>
-                    <input type="number" id="time-input" placeholder="Enter time">
+                    <input type="number" step="any" inputmode="decimal" id="time-input" aria-describedby="time-feedback time-note" placeholder="Enter time">
+                    <p class="input-feedback" id="time-feedback"></p>
                 </div>
                 <div class="input-group">
                     <label for="from-time-unit">From:</label>
@@ -181,9 +202,14 @@
                         <option value="yr">Year</option>
                     </select>
                 </div>
-                <button onclick="convertTime()">Convert</button>
-                <div class="result" id="time-result">Result: 0.00000</div>
-            </div>
+                <p class="unit-note" id="time-note" hidden></p>
+                <div class="converter-actions">
+                    <button type="button" class="swap-units" id="time-swap" aria-label="Swap time units">Swap units</button>
+                    <button type="button" class="copy-result" id="time-copy" aria-label="Copy time result" disabled>Copy result</button>
+                </div>
+                <div class="result" id="time-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Result: <span id="time-result-value">&mdash;</span><span id="time-result-unit"></span></div>
+                <p class="copy-feedback" id="time-copy-feedback" role="status"></p>
+            </section>
         </div>
 
         <a href="index.html" class="back-link">← Back to Calculator Suite</a>
