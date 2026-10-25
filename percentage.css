@@ -14,7 +14,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; padding: 0 24px 32px; background: var(--page); color: var(--ink); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.5; }
 a { color: inherit; }
-.page-shell { max-width: 1000px; margin: 0 auto; }
+.container { max-width: 1000px; margin: 0 auto; }
 .site-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 22px; font-weight: 750; letter-spacing: -.6px; text-decoration: none; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 34px; border-radius: 8px; background: var(--shell); color: var(--accent); font: 28px/1 Consolas, monospace; }
