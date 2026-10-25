@@ -1,28 +1,3 @@
-// Add fade-in effect after page load
-document.addEventListener('DOMContentLoaded', function () {
-    // Wait for a brief moment before starting the fade-in
-    setTimeout(function () {
-        // Hide the logo
-        const logoContainer = document.querySelector('.logo-container');
-        if (logoContainer) {
-            logoContainer.style.opacity = '0';
-            logoContainer.style.transition = 'opacity 0.5s ease-out';
-
-            // After logo fades out, show the content
-            setTimeout(function () {
-                logoContainer.style.display = 'none';
-
-                // Show the content
-                const contentContainer = document.querySelector('.content-container');
-                if (contentContainer) {
-                    contentContainer.classList.remove('hidden');
-                    contentContainer.classList.add('visible');
-                }
-            }, 500);
-        }
-    }, 500); // Show the logo for 500ms before starting fade-in
-});
-
 // GWA Calculator Logic
 document.addEventListener('DOMContentLoaded', function () {
     if (document.body.classList.contains('gwa-page')) {
@@ -34,10 +9,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const noHistoryMessage = document.getElementById('no-history-message');
         const clearHistoryBtn = document.getElementById('clear-history-btn');
 
-        let courseCount = 0;
-
         // Local Storage keys
         const GWA_HISTORY_KEY = 'gwaCalculatorHistory';
+
+        function readStoredArray(key) {
+            try {
+                const value = JSON.parse(localStorage.getItem(key) || '[]');
+                return Array.isArray(value) ? value : [];
+            } catch { return []; }
+        }
+        function writeStoredArray(key, value) {
+            try { localStorage.setItem(key, JSON.stringify(value)); }
+            catch { /* Calculations remain usable when browser storage is unavailable. */ }
+        }
 
         // Load saved data from Local Storage on page load
         window.addEventListener('load', function () {
@@ -52,66 +36,59 @@ document.addEventListener('DOMContentLoaded', function () {
             const unitsInputs = document.querySelectorAll('.units-input');
 
             gradeInputs.forEach((gradeInput, index) => {
-                const grade = parseFloat(gradeInput.value);
-                const units = parseFloat(unitsInputs[index].value);
-                if (!isNaN(grade) && !isNaN(units)) {
-                    courses.push({ grade: grade, units: units });
-                }
+                courses.push({ grade: gradeInput.value, units: unitsInputs[index].value });
             });
 
-            localStorage.setItem('gwaCalculatorData', JSON.stringify(courses));
+            writeStoredArray('gwaCalculatorData', courses);
         }
 
         // Load saved course data from Local Storage
         function loadCourseDataFromStorage() {
-            const savedData = localStorage.getItem('gwaCalculatorData');
-            if (savedData) {
-                const courses = JSON.parse(savedData);
-                if (courses.length > 0) {
-                    // Clear existing rows except the first one
-                    while (courseInputs.children.length > 1) {
-                        courseInputs.removeChild(courseInputs.lastChild);
-                    }
-
-                    // Add saved courses
-                    courses.forEach((course, index) => {
-                        if (index === 0) {
-                            // Update first row
-                            const firstRow = courseInputs.querySelector('.course-row');
-                            firstRow.querySelector('.grade-input').value = course.grade;
-                            firstRow.querySelector('.units-input').value = course.units;
-                        } else {
-                            // Add new rows for additional courses
-                            const courseRow = document.createElement('div');
-                            courseRow.classList.add('course-row');
-
-                            const gradeInput = document.createElement('input');
-                            gradeInput.type = 'number';
-                            gradeInput.className = 'grade-input';
-                            gradeInput.placeholder = 'Grade (e.g., 1.0, 3.0)';
-                            gradeInput.step = '0.01';
-                            gradeInput.value = course.grade;
-
-                            const unitsInput = document.createElement('input');
-                            unitsInput.type = 'number';
-                            unitsInput.className = 'units-input';
-                            unitsInput.placeholder = 'Units (e.g., 3, 1)';
-                            unitsInput.step = '0.5';
-                            unitsInput.value = course.units;
-
-                            const removeBtn = document.createElement('button');
-                            removeBtn.className = 'remove-course-btn';
-                            removeBtn.textContent = '-';
-
-                            courseRow.appendChild(gradeInput);
-                            courseRow.appendChild(unitsInput);
-                            courseRow.appendChild(removeBtn);
-
-                            courseInputs.appendChild(courseRow);
-                        }
-                    });
-                    updateRemoveButtonsVisibility();
+            const courses = readStoredArray('gwaCalculatorData').filter(course => course && ['string', 'number'].includes(typeof course.grade) && ['string', 'number'].includes(typeof course.units));
+            if (courses.length) {
+                // Clear existing rows except the first one
+                while (courseInputs.children.length > 1) {
+                    courseInputs.removeChild(courseInputs.lastChild);
                 }
+
+                // Add saved courses
+                courses.forEach((course, index) => {
+                    if (index === 0) {
+                        // Update first row
+                        const firstRow = courseInputs.querySelector('.course-row');
+                        firstRow.querySelector('.grade-input').value = course.grade;
+                        firstRow.querySelector('.units-input').value = course.units;
+                    } else {
+                        // Add new rows for additional courses
+                        const courseRow = document.createElement('div');
+                        courseRow.classList.add('course-row');
+
+                        const gradeInput = document.createElement('input');
+                        gradeInput.type = 'number';
+                        gradeInput.className = 'grade-input';
+                        gradeInput.placeholder = 'Grade (e.g., 1.0, 3.0)';
+                        gradeInput.step = '0.01';
+                        gradeInput.value = course.grade;
+
+                        const unitsInput = document.createElement('input');
+                        unitsInput.type = 'number';
+                        unitsInput.className = 'units-input';
+                        unitsInput.placeholder = 'Units (e.g., 3, 1)';
+                        unitsInput.step = '0.5';
+                        unitsInput.value = course.units;
+
+                        const removeBtn = document.createElement('button');
+                        removeBtn.className = 'remove-course-btn';
+                        removeBtn.textContent = '-';
+
+                        courseRow.appendChild(gradeInput);
+                        courseRow.appendChild(unitsInput);
+                        courseRow.appendChild(removeBtn);
+
+                        courseInputs.appendChild(courseRow);
+                    }
+                });
+                updateRemoveButtonsVisibility();
             }
         }
 
@@ -134,14 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 history.splice(10);
             }
 
-            localStorage.setItem(GWA_HISTORY_KEY, JSON.stringify(history));
+            writeStoredArray(GWA_HISTORY_KEY, history);
             displayHistory(history);
         }
 
         // Get history from Local Storage
         function getHistoryFromStorage() {
-            const history = localStorage.getItem(GWA_HISTORY_KEY);
-            return history ? JSON.parse(history) : [];
+            return readStoredArray(GWA_HISTORY_KEY).filter(item => item && Number.isFinite(item.gwa) && Array.isArray(item.courses) && item.courses.every(course => course && Number.isFinite(course.grade) && Number.isFinite(course.units)));
         }
 
         // Load and display history
@@ -289,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             updateRemoveButtonsVisibility();
 
+            saveCourseDataToStorage();
+
             // Update the result display with the GWA from this history item
             gwaResult.textContent = `Your GWA is: ${item.gwa.toFixed(2)}. ${item.gwa < 1.50 ? 'You are a University Scholar!' : item.gwa < 1.75 ? 'You are a College Scholar!' : ''}`;
             gwaResult.style.color = item.gwa < 1.50 ? 'gold' : item.gwa < 1.75 ? 'silver' : 'green';
@@ -298,20 +276,19 @@ document.addEventListener('DOMContentLoaded', function () {
         function deleteHistoryItem(id) {
             const history = getHistoryFromStorage();
             const updatedHistory = history.filter(item => item.id !== id);
-            localStorage.setItem(GWA_HISTORY_KEY, JSON.stringify(updatedHistory));
+            writeStoredArray(GWA_HISTORY_KEY, updatedHistory);
             displayHistory(updatedHistory);
         }
 
         // Clear all history
         function clearHistory() {
             if (confirm('Are you sure you want to clear all history?')) {
-                localStorage.removeItem(GWA_HISTORY_KEY);
+                writeStoredArray(GWA_HISTORY_KEY, []);
                 loadAndDisplayHistory();
             }
         }
 
         function addCourseRow() {
-            courseCount++;
             const courseRow = document.createElement('div');
             courseRow.classList.add('course-row');
             courseRow.innerHTML = `
@@ -323,21 +300,24 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show remove button for all rows if there's more than one course
             updateRemoveButtonsVisibility();
 
-            // Add event listener to save data when input changes
-            courseRow.querySelector('.grade-input').addEventListener('input', saveCourseDataToStorage);
-            courseRow.querySelector('.units-input').addEventListener('input', saveCourseDataToStorage);
+            saveCourseDataToStorage();
+            courseRow.querySelector('.grade-input').focus();
         }
 
         function removeCourseRow(event) {
             if (courseInputs.children.length > 1) {
                 event.target.closest('.course-row').remove();
-                courseCount--;
                 updateRemoveButtonsVisibility();
                 saveCourseDataToStorage(); // Save after removal
             }
         }
 
         function updateRemoveButtonsVisibility() {
+            courseInputs.querySelectorAll('.course-row').forEach((row, index) => {
+                row.querySelector('.grade-input').setAttribute('aria-label', `Grade for course ${index + 1}`);
+                row.querySelector('.units-input').setAttribute('aria-label', `Units for course ${index + 1}`);
+                row.querySelector('.remove-course-btn').setAttribute('aria-label', `Remove course ${index + 1}`);
+            });
             const removeButtons = document.querySelectorAll('.remove-course-btn');
             if (courseInputs.children.length <= 1) {
                 removeButtons.forEach(button => button.style.display = 'none');
@@ -359,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const grade = parseFloat(gradeInput.value);
                 const units = parseFloat(unitsInputs[index].value);
 
-                if (isNaN(grade) || isNaN(units) || grade < 0 || units <= 0) {
+                if (!Number.isFinite(grade) || !Number.isFinite(units) || grade < 0 || units <= 0) {
                     isValid = false;
                     return;
                 }
@@ -394,14 +374,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Initial row
-        addCourseRow();
-
-        // Add event listeners to initial inputs
-        const firstGradeInput = document.querySelector('.grade-input');
-        const firstUnitsInput = document.querySelector('.units-input');
-        firstGradeInput.addEventListener('input', saveCourseDataToStorage);
-        firstUnitsInput.addEventListener('input', saveCourseDataToStorage);
+        // The first row is already present in the HTML. Delegation also covers restored rows.
+        updateRemoveButtonsVisibility();
+        courseInputs.addEventListener('input', saveCourseDataToStorage);
 
         addCourseBtn.addEventListener('click', addCourseRow);
         calculateGwaBtn.addEventListener('click', calculateGWA);

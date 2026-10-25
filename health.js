@@ -2,7 +2,7 @@ function calculateBMI() {
     const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to m
     
-    if (weight && height) {
+    if ([weight, height].every(value => Number.isFinite(value) && value > 0)) {
         const bmi = weight / (height * height);
         const resultDiv = document.getElementById('bmi-result');
         resultDiv.style.display = 'block';
@@ -19,36 +19,42 @@ function calculateBMI() {
     }
 }
 
+function calculateBodyFatPercentage(gender, waistCm, hipCm, neckCm, heightCm) {
+    const required = gender === 'female' ? [waistCm, hipCm, neckCm, heightCm] : [waistCm, neckCm, heightCm];
+    if (!['male', 'female'].includes(gender) || !required.every(value => Number.isFinite(value) && value > 0)) {
+        throw new Error('Enter positive waist, neck, and height measurements. Hip is also required for females.');
+    }
+    // These circumference-equation constants require inches, not the UI's centimetres.
+    // Source: https://api.army.mil/e2/c/downloads/566092.pdf (Army body-fat worksheet).
+    const waist = waistCm / 2.54;
+    const hip = hipCm / 2.54;
+    const neck = neckCm / 2.54;
+    const height = heightCm / 2.54;
+    const circumference = gender === 'male' ? waist - neck : waist + hip - neck;
+    if (circumference <= 0) throw new Error('Check the measurements: the circumference difference must be greater than zero.');
+    const bodyFat = gender === 'male'
+        ? 86.010 * Math.log10(circumference) - 70.041 * Math.log10(height) + 36.76
+        : 163.205 * Math.log10(circumference) - 97.684 * Math.log10(height) - 78.387;
+    if (!Number.isFinite(bodyFat) || bodyFat <= 0 || bodyFat >= 100) {
+        throw new Error('These measurements are outside the range of this formula. Check the values in centimetres.');
+    }
+    return bodyFat;
+}
+
 function calculateBodyFat() {
-    const gender = document.getElementById('gender').value;
-    const waist = parseFloat(document.getElementById('waist').value);
-    const hip = parseFloat(document.getElementById('hip').value);
-    const neck = parseFloat(document.getElementById('neck').value);
-    
-    // Height is needed for the formula but missing from the body fat card.
-    // Let's try to get it from the BMI card's height input.
-    const height = parseFloat(document.getElementById('height').value);
-    
-    if (waist && neck && height) {
-        let bodyFat;
-        
-        if (gender === 'male') {
-            // Using a common formula (U.S. Navy method)
-            bodyFat = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76;
-        } else if (gender === 'female' && hip) {
-            bodyFat = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
-        }
-        
-        const resultDiv = document.getElementById('bodyfat-result');
-        resultDiv.style.display = 'block';
-        
-        if (bodyFat && bodyFat > 0) {
-            resultDiv.innerHTML = `Estimated Body Fat: ${bodyFat.toFixed(1)}%`;
-        } else {
-            resultDiv.innerHTML = "Please ensure all measurements are correct. Hip is required for females.";
-        }
-    } else {
-        alert("Please enter valid measurements for waist, neck, and height (in the BMI card).");
+    const resultDiv = document.getElementById('bodyfat-result');
+    resultDiv.style.display = 'block';
+    try {
+        const bodyFat = calculateBodyFatPercentage(
+            document.getElementById('gender').value,
+            parseFloat(document.getElementById('waist').value),
+            parseFloat(document.getElementById('hip').value),
+            parseFloat(document.getElementById('neck').value),
+            parseFloat(document.getElementById('height-bodyfat').value)
+        );
+        resultDiv.textContent = `Estimated Body Fat: ${bodyFat.toFixed(1)}%`;
+    } catch (error) {
+        resultDiv.textContent = error.message;
     }
 }
 
@@ -56,7 +62,7 @@ function calculateIdealWeight() {
     const gender = document.getElementById('gender-ideal').value;
     const height = parseFloat(document.getElementById('height-ideal').value);
     
-    if (height) {
+    if (Number.isFinite(height) && height > 0) {
         let idealWeight;
         
         // Using Devine Formula
@@ -84,7 +90,7 @@ function calculateBMR() {
     const height = parseFloat(document.getElementById('height-bmr').value);
     const age = parseFloat(document.getElementById('age').value);
     
-    if (weight && height && age) {
+    if ([weight, height, age].every(value => Number.isFinite(value) && value > 0)) {
         let bmr;
         
         // Revised Harris-Benedict Equation
@@ -112,6 +118,9 @@ window.onload = function() {
         if (event.key === 'Enter') {
             calculateBMI();
         }
+    });
+    document.getElementById('height-bodyfat').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') calculateBodyFat();
     });
     document.getElementById('waist').addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {

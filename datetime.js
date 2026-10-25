@@ -1,6 +1,11 @@
+// Date input values are calendar dates; derive today's value in the user's local zone.
+function localDateString(date = new Date()) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
 // Set today as default for date inputs
 window.onload = function() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = localDateString();
     const dateInputs = document.querySelectorAll('input[type="date"]');
     dateInputs.forEach(input => {
         if (!input.value) {
@@ -100,7 +105,10 @@ window.onload = function() {
 function populateTimezones() {
     const fromTimezone = document.getElementById('from-timezone');
     const toTimezone = document.getElementById('to-timezone');
-    const timezones = Intl.supportedValuesOf('timeZone');
+    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const supported = typeof Intl.supportedValuesOf === 'function' ? Intl.supportedValuesOf('timeZone') : [];
+    // UTC and some local zone aliases are omitted by supportedValuesOf.
+    const timezones = [...new Set(['UTC', localTimezone, ...supported])].sort();
 
     timezones.forEach(zone => {
         const option1 = document.createElement('option');
@@ -115,7 +123,6 @@ function populateTimezones() {
     });
 
     // Set default values
-    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     fromTimezone.value = localTimezone;
     toTimezone.value = 'UTC';
 }
@@ -179,7 +186,7 @@ function calculateDateDifference() {
 function calculateAge() {
     const birthDateStr = document.getElementById('birth-date').value;
     if (birthDateStr) {
-        const birthDate = new Date(birthDateStr);
+        const birthDate = new Date(birthDateStr + 'T00:00:00');
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -219,11 +226,11 @@ function calculateCountdown() {
     const anniversaryDateStr = document.getElementById('anniversary-date').value;
     if (anniversaryDateStr) {
         const anniversaryDate = new Date(anniversaryDateStr);
-        const today = new Date();
-        today.setHours(0,0,0,0); // Set today's time to the beginning of the day
+        // Compare two UTC calendar-date ordinals to avoid time-zone and DST offsets.
+        const today = new Date(localDateString());
 
         const timeDiff = anniversaryDate.getTime() - today.getTime();
-        const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        const daysLeft = Math.round(timeDiff / (1000 * 3600 * 24));
 
         const resultDiv = document.getElementById('countdown-result');
         resultDiv.style.display = 'block';
