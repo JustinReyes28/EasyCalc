@@ -52,8 +52,12 @@
                     <label for="neck">Neck (cm):</label>
                     <input type="number" id="neck" placeholder="Neck measurement">
                 </div>
+                <div class="input-group">
+                    <label for="height-bodyfat">Height (cm):</label>
+                    <input type="number" id="height-bodyfat" placeholder="Enter height" min="0" step="any">
+                </div>
                 <button onclick="calculateBodyFat()">Calculate Body Fat</button>
-                <div id="bodyfat-result" class="result"></div>
+                <div id="bodyfat-result" class="result" role="status" aria-live="polite"></div>
             </div>
             
             <div class="calculator-card">

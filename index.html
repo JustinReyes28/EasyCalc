@@ -1,115 +1,77 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Six simple calculators for everyday math, science, unit conversions, grades, health, and dates. Free to use, with calculations on your device.">
     <title>EasyCalc - Calculator Suite</title>
     <link rel="stylesheet" href="landing.css">
     <link rel="icon" type="image/png" href="favicon.png">
-<style>
-    body {
-        background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-    }
-</style>
 </head>
 <body>
-    <div class="logo-container">
-        <div class="logo">🧮</div>
-    </div>
-    <div class="content-container hidden">
-        <div class="container">
-            <header>
-                <h1>Welcome to EasyCalc</h1>
-                <p>Your ultimate collection of powerful calculators for every need</p>
-            </header>
-
-            <section class="hero">
-                <div class="hero-content">
-                    <h2>Smart Calculations Made Simple</h2>
-                    <p>Choose from our suite of specialized calculators designed for students, professionals, and everyday users.</p>
-                    <div class="cta-buttons">
-                        <a href="#calculators" class="btn-primary">Explore Calculators</a>
-                        <a href="gwa.html" class="btn-secondary">Try GWA Calculator</a>
-                    </div>
-                </div>
+    <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+        <symbol id="icon-math" viewBox="0 0 24 24"><path d="M5 7h6M8 4v6m6-3h5M5 17h6m3-2h5m-5 4h5"/></symbol>
+        <symbol id="icon-science" viewBox="0 0 24 24"><path d="M4 18c3-1 3-12 8-12s4 11 8 12M4 21V3m0 15h17"/></symbol>
+        <symbol id="icon-unit" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM8 6v4m4-4v6m4-6v4"/></symbol>
+        <symbol id="icon-grade" viewBox="0 0 24 24"><path d="m3 9 9-5 9 5-9 5zM6 11v6c3 3 9 3 12 0v-6m3-2v8"/></symbol>
+        <symbol id="icon-health" viewBox="0 0 24 24"><path d="M20 5c-3-3-6-1-8 1C6-1-1 7 5 13l7 7 7-7c3-3 4-6 1-8Z"/></symbol>
+        <symbol id="icon-date" viewBox="0 0 24 24"><path d="M4 5h16v16H4zM8 3v4m8-4v4M4 10h16M8 14h3m2 3h3"/></symbol>
+    </defs></svg>
+    <div class="container">
+        <header class="site-header">
+            <a class="brand" href="index.html" aria-label="EasyCalc home"><span class="brand-mark" aria-hidden="true">=</span>EasyCalc</a>
+            <a class="header-link" href="#calculators">Find a calculator <span aria-hidden="true">↓</span></a>
+        </header>
+        <main>
+            <section class="intro" aria-labelledby="intro-title">
+                <p class="eyebrow">Less working out. More getting on.</p>
+                <h1 id="intro-title">A calculator for<br>the task at hand.</h1>
+                <p class="intro-description">Everyday sums, tricky formulas, and everything in between. Pick your tool and get straight to the answer.</p>
+                <div class="intro-note"><span aria-hidden="true">✓</span> Free to use <span class="note-divider" aria-hidden="true">/</span> Calculations stay on your device</div>
             </section>
-
-            <section id="calculators" class="calculator-section">
-                <h2>Our Calculator Collection</h2>
+            <section id="calculators" class="calculator-section" aria-labelledby="collection-title">
+                <div class="section-heading"><h2 id="collection-title">Choose your calculator</h2><span>Six tools. One place.</span></div>
                 <div class="calculator-grid">
-                    <div class="calculator-card" data-calculator="arithmetic">
-                        <div class="card-icon">➕</div>
-                        <h3>Arithmetic Calculator</h3>
-                        <p>Perform basic operations: addition, subtraction, multiplication, and division with ease.</p>
-                        <button class="card-button">Launch Calculator</button>
-                    </div>
-
-                    <div class="calculator-card" data-calculator="scientific">
-                        <div class="card-icon">🔬</div>
-                        <h3>Scientific Calculator</h3>
-                        <p>Advanced mathematical functions including trigonometry, logarithms, and exponents.</p>
-                        <button class="card-button">Launch Scientific Calculator</button>
-                    </div>
-
-                    <div class="calculator-card" data-calculator="unit-conversion">
-                        <div class="card-icon">📏</div>
-                        <h3>Unit Conversion</h3>
-                        <p>Convert between various units of measurement including length, weight, volume, time, and temperature.</p>
-                        <button class="card-button">Launch Conversion</button>
-                    </div>
-
-                    <div class="calculator-card" data-calculator="gwa">
-                        <div class="card-icon">📊</div>
-                        <h3>GWA Calculator</h3>
-                        <p>Calculate your General Weighted Average for academic performance tracking.</p>
-                        <button class="card-button">Launch GWA Calculator</button>
-                    </div>
-
-                    <div class="calculator-card" data-calculator="health">
-                        <div class="card-icon">🧡</div>
-                        <h3>Health Calculator</h3>
-                        <p>Calculate BMI, body fat percentage, ideal weight, and other health metrics.</p>
-                        <button class="card-button">Launch Health Calculator</button>
-                    </div>
-
-                    <div class="calculator-card" data-calculator="datetime">
-                        <div class="card-icon">📅</div>
-                        <h3>Date & Time Tools</h3>
-                        <p>Calculate date differences, age, countdowns, timezone converter, and time intervals for scheduling.</p>
-                        <button class="card-button">Launch Date Calculator</button>
-                    </div>
+                    <a href="arithmetic.html" class="calculator-card" aria-labelledby="arithmetic-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-math"/></svg>
+                        <h3 id="arithmetic-title">Arithmetic</h3>
+                        <p>Quick sums, everyday numbers, and expressions with parentheses.</p>
+                        <span class="card-action">Open calculator <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a href="scientific.html" class="calculator-card" aria-labelledby="scientific-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-science"/></svg>
+                        <h3 id="scientific-title">Scientific</h3>
+                        <p>Powers, roots, logarithms, and trigonometry in degrees or radians.</p>
+                        <span class="card-action">Open calculator <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a href="unit-conversion.html" class="calculator-card" aria-labelledby="conversion-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-unit"/></svg>
+                        <h3 id="conversion-title">Unit conversion</h3>
+                        <p>Switch between units of length, weight, volume, time, and temperature.</p>
+                        <span class="card-action">Convert units <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a href="gwa.html" class="calculator-card" aria-labelledby="gwa-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-grade"/></svg>
+                        <h3 id="gwa-title">General weighted average</h3>
+                        <p>Bring your grades and course units together, then save your GWA history.</p>
+                        <span class="card-action">Calculate your GWA <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a href="health.html" class="calculator-card" aria-labelledby="health-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-health"/></svg>
+                        <h3 id="health-title">Health</h3>
+                        <p>Explore BMI, body fat estimates, ideal weight, and daily energy needs.</p>
+                        <span class="card-action">Explore health tools <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a href="datetime.html" class="calculator-card" aria-labelledby="datetime-title">
+                        <svg class="card-icon" aria-hidden="true"><use href="#icon-date"/></svg>
+                        <h3 id="datetime-title">Date &amp; time</h3>
+                        <p>Count days, calculate ages, compare time zones, and plan ahead.</p>
+                        <span class="card-action">Explore date tools <span aria-hidden="true">↗</span></span>
+                    </a>
                 </div>
             </section>
-
-            <section class="features">
-                <h2>Why Choose EasyCalc?</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Fast & Responsive</h3>
-                        <p>Lightning-fast calculations with smooth user interface.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📱</div>
-                        <h3>Mobile Friendly</h3>
-                        <p>Works perfectly on all devices, from smartphones to desktops.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔒</div>
-                        <h3>Privacy First</h3>
-                        <p>No data collection or tracking. Your calculations stay private.</p>
-                    </div>
-                </div>
-            </section>
-
-            <footer>
-                <div class="footer-content">
-                    <p>&copy; 2025 EasyCalc. All rights reserved. made with Vibe Coding.</p>
-                </div>
-            </footer>
-        </div>
+        </main>
+        <footer><p>EasyCalc · A little help with the numbers.</p><p>&copy; 2025 EasyCalc</p></footer>
     </div>
-
-    <script src="landing.js"></script>
 </body>
 </html>

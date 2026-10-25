@@ -1,124 +1,62 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fast, private arithmetic calculator with keyboard entry, parentheses, and no external dependencies.">
     <title>Arithmetic Calculator - EasyCalc</title>
-    <link rel="stylesheet" href="arithmetic.css">
+    <link rel="stylesheet" href="calculator.css">
     <link rel="icon" type="image/png" href="favicon.png">
+    <script src="calculator-engine.js" defer></script>
+    <script src="calculator.js" defer></script>
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Arithmetic Calculator</h1>
-
-        <div class="calculator">
-            <input type="text" class="display" id="display" readonly>
-            <div class="buttons">
-                <button class="btn clear span-two" onclick="clearDisplay()">C</button>
-                <button class="btn operator" onclick="appendToDisplay('/')">/</button>
-                <button class="btn operator" onclick="appendToDisplay('*')">×</button>
-
-                <button class="btn" onclick="appendToDisplay('7')">7</button>
-                <button class="btn" onclick="appendToDisplay('8')">8</button>
-                <button class="btn" onclick="appendToDisplay('9')">9</button>
-                <button class="btn operator" onclick="appendToDisplay('-')">-</button>
-
-                <button class="btn" onclick="appendToDisplay('4')">4</button>
-                <button class="btn" onclick="appendToDisplay('5')">5</button>
-                <button class="btn" onclick="appendToDisplay('6')">6</button>
-                <button class="btn operator" onclick="appendToDisplay('+')">+</button>
-
-                <button class="btn" onclick="appendToDisplay('1')">1</button>
-                <button class="btn" onclick="appendToDisplay('2')">2</button>
-                <button class="btn" onclick="appendToDisplay('3')">3</button>
-                <button class="btn equals" onclick="calculate()" rowspan="2">=</button>
-
-                <button class="btn span-two" onclick="appendToDisplay('0')">0</button>
-                <button class="btn" onclick="appendToDisplay('.')">.</button>
+    <main class="calculator-container">
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">=</span>EasyCalc</a>
+        <header class="page-heading">
+            <p class="eyebrow">Everyday numbers</p>
+            <h1>Arithmetic calculator</h1>
+            <p>From a quick sum to a longer expression. Make room for the numbers.</p>
+        </header>
+        <nav class="calculator-tabs" aria-label="Calculator type">
+            <a href="arithmetic.html" aria-current="page">Arithmetic</a>
+            <a href="scientific.html">Scientific</a>
+        </nav>
+        <section class="calculator" aria-label="Arithmetic calculator">
+            <div class="calculator-toolbar"><span>Basic arithmetic</span><button id="copy-result" class="text-button" type="button" disabled>Copy result</button></div>
+            <div class="display-panel">
+                <label for="display">Expression</label>
+                <input type="text" class="display" id="display" placeholder="0" maxlength="256" autocomplete="off" spellcheck="false" inputmode="decimal" aria-describedby="calculation-feedback keyboard-help">
+                <p id="calculation-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">Ready to calculate</p>
             </div>
-        </div>
-
-        <a href="index.html" class="back-link">← Back to Calculator Suite</a>
-    </div>
-
-    <!-- Include math.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.7.0/math.min.js"></script>
-    <script>
-        let display = document.getElementById('display');
-
-        function appendToDisplay(value) {
-            // Replace × with * for calculation purposes
-            if (value === '×') {
-                value = '*';
-            }
-            display.value += value;
-        }
-
-        function clearDisplay() {
-            display.value = '';
-        }
-
-        function calculate() {
-            try {
-                // Replace × with * and ÷ with / in the expression before evaluating
-                let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-
-                // Use math.js to evaluate the expression safely
-                let result = math.evaluate(expression);
-
-                // Handle division by zero
-                if (result === Infinity || result === -Infinity) {
-                    display.value = 'Error: Div by 0';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                    return;
-                }
-
-                // Check if result is a valid number
-                if (isNaN(result)) {
-                    display.value = 'Error';
-                    setTimeout(() => {
-                        clearDisplay();
-                    }, 2000);
-                } else {
-                    // Format the result to avoid long decimal numbers
-                    if (Number.isFinite(result)) {
-                        // Round to 10 decimal places to avoid floating point precision issues
-                        result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-                        display.value = result;
-                    }
-                }
-            } catch (error) {
-                display.value = 'Error';
-                setTimeout(() => {
-                    clearDisplay();
-                }, 2000);
-            }
-        }
-
-        // Keyboard support
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-
-            if (key >= '0' && key <= '9' || key === '.') {
-                appendToDisplay(key);
-            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-                appendToDisplay(key);
-            } else if (key === 'Enter' || key === '=') {
-                event.preventDefault(); // Prevent form submission
-                calculate();
-            } else if (key === 'Backspace') {
-                display.value = display.value.slice(0, -1);
-            } else if (key.toLowerCase() === 'c') {
-                clearDisplay();
-            }
-        });
-    </script>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 EasyCalc. All rights reserved. made with Vibe Coding.</p>
-        </div>
-    </footer>
+            <div class="buttons">
+                <button type="button" class="btn clear" data-action="clear" aria-label="Clear expression">AC</button>
+                <button type="button" class="btn function" data-value="(" aria-label="Open parenthesis">(</button>
+                <button type="button" class="btn function" data-value=")" aria-label="Close parenthesis">)</button>
+                <button type="button" class="btn function" data-action="backspace" aria-label="Delete last character">⌫</button>
+                <button type="button" class="btn" data-value="7">7</button>
+                <button type="button" class="btn" data-value="8">8</button>
+                <button type="button" class="btn" data-value="9">9</button>
+                <button type="button" class="btn operator" data-value="/" aria-label="Divide">÷</button>
+                <button type="button" class="btn" data-value="4">4</button>
+                <button type="button" class="btn" data-value="5">5</button>
+                <button type="button" class="btn" data-value="6">6</button>
+                <button type="button" class="btn operator" data-value="*" aria-label="Multiply">×</button>
+                <button type="button" class="btn" data-value="1">1</button>
+                <button type="button" class="btn" data-value="2">2</button>
+                <button type="button" class="btn" data-value="3">3</button>
+                <button type="button" class="btn operator" data-value="-" aria-label="Subtract">−</button>
+                <button type="button" class="btn" data-value="0">0</button>
+                <button type="button" class="btn" data-value="." aria-label="Decimal point">.</button>
+                <button type="button" class="btn function" data-value="ans" aria-label="Previous answer">Ans</button>
+                <button type="button" class="btn operator" data-value="+" aria-label="Add">+</button>
+                <button type="button" class="btn equals span-four" data-action="calculate" aria-label="Calculate result">=</button>
+            </div>
+        </section>
+        <p class="keyboard-help" id="keyboard-help"><kbd>Enter</kbd> to calculate · <kbd>Esc</kbd> to clear<br>Type or paste an expression. Use <strong>Ans</strong> for your last result.</p>
+        <a href="index.html" class="back-link">← All calculators</a>
+        <noscript><p class="noscript">Enable JavaScript to calculate. All calculations run on your device.</p></noscript>
+    </main>
+    <footer><p>EasyCalc · Calculations stay on your device.</p></footer>
 </body>
 </html>

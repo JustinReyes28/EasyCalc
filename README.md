@@ -1,92 +1,60 @@
-# EasyCalc
+﻿# EasyCalc
 
-### Live Demo
-Experience EasyCalc live: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
+[Live demo](https://justinreyes28.github.io/EasyCalc/)
 
-A simple, user-friendly calculator built with HTML, CSS, and JavaScript.
+Six browser-based calculators built with HTML, CSS, and JavaScript. No build step, external libraries, fonts, or analytics. Calculations run on your device.
 
-## About
+## Calculators
 
-EasyCalc is a straightforward web-based calculator designed for basic arithmetic operations. It provides a clean and intuitive interface, making calculations quick and efficient. This project serves as a practical demonstration of front-end web development skills using fundamental technologies.
+- **Arithmetic:** addition, subtraction, multiplication, division, parentheses, and reusable answers.
+- **Scientific:** powers, roots, factorials, constants, logarithms, exponentials, and nested trigonometry in degrees or radians.
+- **Unit conversion:** length, weight, temperature, volume, and time.
+- **General weighted average:** course grades and units, saved drafts, and the last 10 calculations.
+- **Health:** BMI, body fat estimates, ideal weight, and basal metabolic rate.
+- **Date & time:** date differences, ages, countdowns, adding days, time intervals, and current times across time zones.
 
-## Features
+## Getting started
 
-### Arithmetic Calculator
-- Perform basic operations: addition, subtraction, multiplication, and division.
-- Enter numbers using the number buttons.
-- Choose an operator such as +, -, *, or /.
-- Press "=" to compute the result.
-- Use "C" to clear the display.
+Open `index.html` in your browser and choose a calculator. The landing page uses ordinary links and works with JavaScript disabled; calculations need JavaScript enabled. All assets are included in this repository, so a local copy works without an internet connection.
 
-### Scientific Calculator
-- Extended functions including sin, cos, tan, log, exponent, and roots.
-- Input a value using the keypad, select a scientific function, and press "=" to view the output.
-- Clear the current entry with the reset button.
+Arithmetic and scientific calculators accept keyboard input and pasted expressions. Press **Enter** or **=** to calculate, **Escape** to clear, or **Backspace** to edit. The keypad inserts at the cursor, and **Copy result** copies a calculated answer (or selects it if clipboard access is unavailable).
 
-### Unit Conversion
-- Convert between units in categories such as length, weight, temperature, and volume.
-- Enter a value, select the units to convert from and to, and view the converted result instantly.
+A number starts a new calculation after a result; an operator continues with that result. Use **Ans** to reuse the last answer. Clear resets the expression and keeps Ans available for the current visit.
 
-### GWA Calculator (General Weighted Average)
-- Calculate your academic average by entering each subject, its unit value, and the corresponding grade.
-- Add all entries to the table and click the calculate button to generate your GWA.
+Scientific examples:
 
-### Health Tools
-- Includes tools such as BMI calculator and calorie estimator.
-- Provide required inputs like height, weight, or activity details and review the calculated health metrics.
+```text
+sin(30)           = 0.5       (DEG, the default)
+sin(pi/2)         = 1         (RAD)
+sin(cos(0)*30)    = 0.5       (DEG)
+(2+3)!            = 120
+2^3^2             = 512
+log(100) + ln(e)  = 3
+```
 
-### General Features
-- **Clear Functionality**: Easily clear the current input or reset all entries.
-- **Responsive Design**: Adapts to different screen sizes, ensuring usability on various devices.
-- **User-Friendly Interface**: Simple and clean layout for easy navigation and operation.
+`log` is base 10; `ln` is the natural logarithm. Powers use `^` (`**` is also accepted). Factorials require whole numbers from 0 to 170. The parser accepts only supported math expressions and never executes input as JavaScript. Expressions are limited to 256 characters and results display up to 12 significant digits.
 
-## Technologies Used
+GWA drafts and history are stored in your browser's local storage. Calculations remain usable if that storage is unavailable. Body-fat inputs use centimetres and are converted to inches for the circumference equations; height has its own field in the body-fat card. The equation constants and inch units are documented in the [Army body-fat worksheet](https://api.army.mil/e2/c/downloads/566092.pdf).
 
-*   **HTML5**: For the basic structure and content of the calculator.
-*   **CSS3**: For styling the calculator, making it visually appealing and responsive.
-*   **JavaScript**: For implementing the calculator's logic and interactivity.
+## Development and checks
 
-## Usage
+There are no production dependencies to install. Serve the files with any static server, or open them directly.
 
-Open `index.html` in your browser. You will see a menu or set of tabs that let you choose among the available tools. Select the tool you want, then follow its workflow.
+Run the dependency-free math and body-fat regression tests with an installed Node.js:
 
-### Arithmetic Calculator
-1. Enter numbers using the number buttons.
-2. Choose an operator such as +, -, *, or /.
-3. Press "=" to compute the result.
-4. Use "C" to clear the display.
+```sh
+node --test tests/calculator-engine.test.cjs
+```
 
-### Scientific Calculator
-1. Input a value using the keypad.
-2. Select scientific functions like sin, cos, tan, log, exponent, or roots.
-3. Press "=" to view the output.
-4. Clear the current entry with the reset button.
+The optional browser regression script uses an **already installed** Python Playwright package and Google Chrome. It does not install or download either. It loads local files and blocks external requests.
 
-### Unit Conversion
-1. Pick a category such as length, weight, temperature, or volume.
-2. Enter a value and select the units to convert from and to.
-3. View the converted result instantly.
+```sh
+python tests/browser-smoke.py
+python tests/browser-smoke.py --screenshots path/to/local/screenshots
+```
 
-### GWA Calculator
-1. Enter each subject, its unit value, and the corresponding grade.
-2. Add all entries to the table.
-3. Click the calculate button to generate your General Weighted Average.
-
-### Health Tools
-1. Choose a tool such as BMI calculator or calorie estimator.
-2. Provide the required inputs like height, weight, or activity details.
-3. Review the calculated health metrics.
-
-### Date Tools
-1. Select a function like date difference, age computation, or day finder.
-2. Enter the date values needed.
-3. Read the computed output immediately.
-
+Browser checks cover keyboard and caret editing, error recovery, scientific functions, angle modes, mobile layouts and touch targets, GWA restoration, body-fat units, and date handling in Singapore and Los Angeles.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-Your Name - JustinReyes28@proton.me
+[MIT](LICENSE)
