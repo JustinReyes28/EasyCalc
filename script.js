@@ -1,3 +1,44 @@
+<<<<<<< HEAD
+=======
+// Register service worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+}
+
+// Add fade-in effect after page load
+document.addEventListener('DOMContentLoaded', function () {
+    // Wait for a brief moment before starting the fade-in
+    setTimeout(function () {
+        // Hide the logo
+        const logoContainer = document.querySelector('.logo-container');
+        if (logoContainer) {
+            logoContainer.style.opacity = '0';
+            logoContainer.style.transition = 'opacity 0.5s ease-out';
+
+            // After logo fades out, show the content
+            setTimeout(function () {
+                logoContainer.style.display = 'none';
+
+                // Show the content
+                const contentContainer = document.querySelector('.content-container');
+                if (contentContainer) {
+                    contentContainer.classList.remove('hidden');
+                    contentContainer.classList.add('visible');
+                }
+            }, 500);
+        }
+    }, 500); // Show the logo for 500ms before starting fade-in
+});
+
+>>>>>>> origin/main
 // GWA Calculator Logic
 document.addEventListener('DOMContentLoaded', function () {
     if (document.body.classList.contains('gwa-page')) {

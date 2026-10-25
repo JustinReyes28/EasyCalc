@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 ﻿# EasyCalc
 
 [Live demo](https://justinreyes28.github.io/EasyCalc/)
 
 Six browser-based calculators built with HTML, CSS, and JavaScript. No build step, external libraries, fonts, or analytics. Calculations run on your device.
+=======
+# EasyCalc
+
+### Live Demo
+Experience EasyCalc live: [https://justinreyes28.github.io/EasyCalc/](https://justinreyes28.github.io/EasyCalc/)
+
+A simple, user-friendly calculator built with HTML, CSS, and JavaScript.
+>>>>>>> origin/main
 
 ## Calculators
 
@@ -40,6 +49,7 @@ GWA drafts and history are stored in your browser's local storage. Calculations 
 
 There are no production dependencies to install. Serve the files with any static server, or open them directly.
 
+<<<<<<< HEAD
 Run the dependency-free math and body-fat regression tests with an installed Node.js:
 
 ```sh
@@ -58,3 +68,47 @@ Browser checks cover keyboard and caret editing, error recovery, scientific func
 ## License
 
 [MIT](LICENSE)
+=======
+Open `index.html` in your browser. You will see a menu or set of tabs that let you choose among the available tools. Select the tool you want, then follow its workflow.
+
+### Arithmetic Calculator
+1. Enter numbers using the number buttons.
+2. Choose an operator such as +, -, *, or /.
+3. Press "=" to compute the result.
+4. Use "C" to clear the display.
+
+### Scientific Calculator
+1. Input a value using the keypad.
+2. Select scientific functions like sin, cos, tan, log, exponent, or roots.
+3. Press "=" to view the output.
+4. Clear the current entry with the reset button.
+
+### Unit Conversion
+1. Pick a category such as length, weight, temperature, or volume.
+2. Enter a value and select the units to convert from and to.
+3. View the converted result instantly.
+
+### GWA Calculator
+1. Enter each subject, its unit value, and the corresponding grade.
+2. Add all entries to the table.
+3. Click the calculate button to generate your General Weighted Average.
+
+### Health Tools
+1. Choose a tool such as BMI calculator or calorie estimator.
+2. Provide the required inputs like height, weight, or activity details.
+3. Review the calculated health metrics.
+
+### Date Tools
+1. Select a function like date difference, age computation, or day finder.
+2. Enter the date values needed.
+3. Read the computed output immediately.
+
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Your Name - JustinReyes28@proton.me
+>>>>>>> origin/main
