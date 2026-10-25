@@ -14,20 +14,18 @@
     <main class="calculator-container">
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">=</span>EasyCalc</a>
         <header class="page-heading">
-            <p class="eyebrow">Everyday numbers</p>
             <h1>Arithmetic calculator</h1>
-            <p>From a quick sum to a longer expression. Make room for the numbers.</p>
         </header>
         <nav class="calculator-tabs" aria-label="Calculator type">
             <a href="arithmetic.html" aria-current="page">Arithmetic</a>
             <a href="scientific.html">Scientific</a>
         </nav>
         <section class="calculator" aria-label="Arithmetic calculator">
-            <div class="calculator-toolbar"><span>Basic arithmetic</span><button id="copy-result" class="text-button" type="button" disabled>Copy result</button></div>
+            <div class="calculator-toolbar"><button id="copy-result" class="text-button" type="button" disabled>Copy result</button></div>
             <div class="display-panel">
                 <label for="display">Expression</label>
                 <input type="text" class="display" id="display" placeholder="0" maxlength="256" autocomplete="off" spellcheck="false" inputmode="decimal" aria-describedby="calculation-feedback keyboard-help">
-                <p id="calculation-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">Ready to calculate</p>
+                <p id="calculation-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
             </div>
             <div class="buttons">
                 <button type="button" class="btn clear" data-action="clear" aria-label="Clear expression">AC</button>
@@ -55,8 +53,8 @@
         </section>
         <p class="keyboard-help" id="keyboard-help"><kbd>Enter</kbd> to calculate · <kbd>Esc</kbd> to clear<br>Type or paste an expression. Use <strong>Ans</strong> for your last result.</p>
         <a href="index.html" class="back-link">← All calculators</a>
-        <noscript><p class="noscript">Enable JavaScript to calculate. All calculations run on your device.</p></noscript>
+        <noscript><p class="noscript">Enable JavaScript to calculate.</p></noscript>
     </main>
-    <footer><p>EasyCalc · Calculations stay on your device.</p></footer>
+    <footer><p>&copy; 2025 EasyCalc</p></footer>
 </body>
 </html>

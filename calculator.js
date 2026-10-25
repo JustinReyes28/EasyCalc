@@ -11,7 +11,7 @@
         evaluated = false;
         display.removeAttribute('aria-invalid');
         feedback.classList.remove('is-error');
-        feedback.textContent = 'Ready to calculate';
+        feedback.textContent = '';
         copyButton.disabled = true;
     }
     function insert(value) {
