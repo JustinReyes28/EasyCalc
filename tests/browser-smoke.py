@@ -40,7 +40,7 @@ with sync_playwright() as p:
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Horizontal overflow'
 
     visit('index.html')
-    expect(page.locator('.calculator-card')).to_have_count(6)
+    expect(page.locator('.calculator-card')).to_have_count(7)
     screenshot('landing-desktop')
     for size in [(320, 740), (375, 812), (844, 390), (1280, 1000)]:
         page.set_viewport_size({'width': size[0], 'height': size[1]})
@@ -180,7 +180,7 @@ with sync_playwright() as p:
     no_js.route('**/*', offline)
     no_js_page = no_js.new_page()
     no_js_page.goto((root / 'index.html').as_uri())
-    expect(no_js_page.locator('.calculator-card')).to_have_count(6)
+    expect(no_js_page.locator('.calculator-card')).to_have_count(7)
     expect(no_js_page.get_by_role('link', name='Scientific', exact=True)).to_be_visible()
     no_js.close()
     assert not errors, errors

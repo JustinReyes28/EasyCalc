@@ -47,15 +47,13 @@ header h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-header p {
-    color: var(--light-color);
-    opacity: 0.9;
-    margin-bottom: 2rem;
+header {
+    margin-bottom: 1.5rem;
 }
 
 .calculator-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
     gap: 1.5rem;
 }
 
@@ -74,7 +72,7 @@ header p {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.calculator-card h3 {
+.calculator-card h2 {
     color: var(--light-color);
     margin-bottom: 1rem;
     font-size: 1.4rem;
@@ -117,7 +115,7 @@ button {
     margin-top: 0.5rem;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background: #2980b9;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
@@ -197,4 +195,89 @@ footer {
 .footer-left p {
     font-size: 0.9rem;
     opacity: 0.8;
+}
+/* Conversion controls keep the current result and actions together. */
+.calculator-card {
+    min-width: 0;
+}
+
+.converter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.converter-actions button {
+    flex: 1 1 120px;
+    min-height: 44px;
+    padding: 0.75rem 0.5rem;
+    margin-top: 0;
+    width: auto;
+    background: #17618f;
+}
+
+.converter-actions button:hover:not(:disabled) {
+    background: #124d72;
+}
+
+button:disabled {
+    background: #495961;
+    color: #d7dfe3;
+    cursor: not-allowed;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible,
+.result:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+input[aria-invalid="true"] {
+    border: 2px solid #ffbfaa;
+}
+
+.input-feedback,
+.copy-feedback,
+.unit-note {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.input-feedback:not(:empty),
+.copy-feedback:not(:empty) {
+    margin-top: 0.5rem;
+}
+
+.input-feedback {
+    color: #fff0ea;
+}
+
+.unit-note {
+    margin: 0 0 0.75rem;
+}
+
+.result {
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    .calculator-card {
+        padding: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+    }
 }

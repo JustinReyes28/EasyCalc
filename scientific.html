@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="calculator.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="calculator-engine.js" defer></script>
+    <script src="history-core.js" defer></script>
     <script src="calculator.js" defer></script>
 </head>
 <body>
     <main class="calculator-container scientific-page">
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">=</span>EasyCalc</a>
         <header class="page-heading">
-            <p class="eyebrow">A little more possibility</p>
             <h1>Scientific calculator</h1>
-            <p>Explore powers, roots, and angles. Keep the whole expression in view.</p>
         </header>
         <nav class="calculator-tabs" aria-label="Calculator type">
             <a href="arithmetic.html">Arithmetic</a>
@@ -30,7 +29,7 @@
             <div class="display-panel">
                 <label for="display">Expression</label>
                 <input type="text" class="display" id="display" placeholder="0" maxlength="256" autocomplete="off" spellcheck="false" inputmode="text" aria-describedby="calculation-feedback keyboard-help">
-                <p id="calculation-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">Ready to calculate</p>
+                <p id="calculation-feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
             </div>
             <div class="buttons">
                 <button type="button" class="btn clear" data-action="clear" aria-label="Clear expression">AC</button>
@@ -70,10 +69,18 @@
                 <button type="button" class="btn equals span-five" data-action="calculate" aria-label="Calculate result">=</button>
             </div>
         </section>
+        <details class="calculation-history" id="calculation-history">
+            <summary>History <span id="history-count">(0)</span></summary>
+            <div class="history-content">
+                <button type="button" class="history-button clear-history" id="clear-history" hidden>Clear history</button>
+                <p class="history-empty" id="history-empty">No calculations yet.</p>
+                <ol class="history-list" id="history-list" aria-label="Calculation history" hidden></ol>
+            </div>
+        </details>
         <p class="keyboard-help" id="keyboard-help"><kbd>Enter</kbd> to calculate · <kbd>Esc</kbd> to clear<br><strong>log</strong> is base 10 · <strong>ln</strong> is base e · angles start in <strong>degrees</strong></p>
         <a href="index.html" class="back-link">← All calculators</a>
-        <noscript><p class="noscript">Enable JavaScript to calculate. All calculations run on your device.</p></noscript>
+        <noscript><p class="noscript">Enable JavaScript to calculate.</p></noscript>
     </main>
-    <footer><p>EasyCalc · Calculations stay on your device.</p></footer>
+    <footer><p>&copy; 2025 EasyCalc</p></footer>
 </body>
 </html>

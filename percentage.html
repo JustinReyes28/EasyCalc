@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator - EasyCalc</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="percentage.css">
+    <script src="percentage.js" defer></script>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">=</span>EasyCalc</a>
+            <a class="back-link" href="index.html"><span aria-hidden="true">&larr;</span> All calculators</a>
+        </header>
+        <main>
+            <h1>Percentage calculator</h1>
+            <div class="calculator-grid">
+                <form class="calculator-card" id="percent-of-form" aria-labelledby="percent-of-title" novalidate>
+                    <h2 id="percent-of-title">Percentage of a value</h2>
+                    <div class="fields">
+                        <div class="field"><label for="percent-of-percentage">Percentage (%)</label><input id="percent-of-percentage" name="percentage" type="number" step="any" required aria-describedby="percent-of-error"></div>
+                        <div class="field"><label for="percent-of-value">Value</label><input id="percent-of-value" name="value" type="number" step="any" required aria-describedby="percent-of-error"></div>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <p class="form-error" id="percent-of-error" role="alert" hidden></p>
+                    <output class="result" id="percent-of-result" for="percent-of-percentage percent-of-value" aria-live="polite" aria-atomic="true" hidden></output>
+                </form>
+                <form class="calculator-card" id="what-percent-form" aria-labelledby="what-percent-title" novalidate>
+                    <h2 id="what-percent-title">What percentage?</h2>
+                    <div class="fields">
+                        <div class="field"><label for="what-percent-part">Part</label><input id="what-percent-part" name="part" type="number" step="any" required aria-describedby="what-percent-error"></div>
+                        <div class="field"><label for="what-percent-whole">Whole</label><input id="what-percent-whole" name="whole" type="number" step="any" required aria-describedby="what-percent-error"></div>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <p class="form-error" id="what-percent-error" role="alert" hidden></p>
+                    <output class="result" id="what-percent-result" for="what-percent-part what-percent-whole" aria-live="polite" aria-atomic="true" hidden></output>
+                </form>
+                <form class="calculator-card" id="change-form" aria-labelledby="change-title" novalidate>
+                    <h2 id="change-title">Percentage change</h2>
+                    <div class="fields">
+                        <div class="field"><label for="change-original">Original value</label><input id="change-original" name="original" type="number" step="any" required aria-describedby="change-hint change-error"><small id="change-hint">Greater than 0.</small></div>
+                        <div class="field"><label for="change-new">New value</label><input id="change-new" name="newValue" type="number" step="any" required aria-describedby="change-error"></div>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <p class="form-error" id="change-error" role="alert" hidden></p>
+                    <output class="result" id="change-result" for="change-original change-new" aria-live="polite" aria-atomic="true" hidden></output>
+                </form>
+                <form class="calculator-card" id="discount-form" aria-labelledby="discount-title" novalidate>
+                    <h2 id="discount-title">Discount</h2>
+                    <div class="fields">
+                        <div class="field"><label for="discount-price">Original price</label><input id="discount-price" name="price" type="number" step="any" min="0" required aria-describedby="discount-error"></div>
+                        <div class="field"><label for="discount-percentage">Discount (%)</label><input id="discount-percentage" name="percentage" type="number" step="any" min="0" max="100" required aria-describedby="discount-error"></div>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <p class="form-error" id="discount-error" role="alert" hidden></p>
+                    <output class="result" id="discount-result" for="discount-price discount-percentage" aria-live="polite" aria-atomic="true" hidden></output>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
