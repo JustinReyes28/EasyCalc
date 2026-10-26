@@ -2,6 +2,13 @@
 
 Here are the drafted posts for Twitter, Reddit, and LinkedIn, highlighting the recent design unification, performance updates, and new features for EasyCalc!
 
+## Recommended Media / Screenshots
+Include these assets with your posts to showcase the updated unified design:
+1. `marketing-assets/landing-desktop.png` (Desktop Dashboard View)
+2. `marketing-assets/scientific-1280.png` (Desktop Scientific Calculator View)
+3. `marketing-assets/landing-mobile.png` (Mobile Dashboard View)
+4. `marketing-assets/arithmetic-mobile.png` (Mobile Arithmetic Calculator View)
+
 ---
 
 ## 🐦 Twitter
@@ -9,8 +16,12 @@ Here are the drafted posts for Twitter, Reddit, and LinkedIn, highlighting the r
 **Option 1 (Feature Focused):**
 Just shipped a massive design update to EasyCalc! 🚀 All 7 browser-based calculators now feature a beautifully unified UI and sleek new background gradients. Plus, we've optimized loading performance so you get your answers even faster! ⚡️ Check it out, 100% free and private (runs locally!): [Link to EasyCalc] #OpenSource #WebDev #JavaScript #Productivity
 
+*(Attach `marketing-assets/landing-desktop.png` and `marketing-assets/scientific-1280.png`)*
+
 **Option 2 (Privacy & Tech Focused):**
 Tired of calculators with ads and trackers? EasyCalc runs entirely in your browser with zero analytics! 🔒 We just rolled out a unified UI across all modules (Scientific, Health, Finance, etc.) and improved page load speeds. Clean, fast, and secure. Try it here: [Link to EasyCalc] #PrivacyFirst #DevTools #HTML #CSS
+
+*(Attach `marketing-assets/landing-mobile.png` and `marketing-assets/arithmetic-mobile.png`)*
 
 ---
 
@@ -42,6 +53,8 @@ I'd love for you to check it out, review the code, or just use it for your daily
 
 Let me know what you think or if you have any feature requests! Feedback is always appreciated.
 
+*(Attach all 4 images from `marketing-assets/` to create an image gallery post)*
+
 ---
 
 ## 💼 LinkedIn
@@ -61,3 +74,5 @@ And the open-source code here: [Link to Repo]
 I'd love to hear your thoughts on the new design! 👇
 
 #WebDevelopment #OpenSource #JavaScript #UIUX #Productivity #Privacy #SoftwareEngineering
+
+*(Attach `marketing-assets/landing-desktop.png` or an image gallery of all 4 screenshots from `marketing-assets/`)*
