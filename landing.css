@@ -13,7 +13,7 @@ h1 { margin: 0 0 20px; font-size: 30px; font-weight: 650; line-height: 1.2; lett
 .calculator-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; text-decoration: none; transition: border-color 150ms, box-shadow 150ms, background-color 150ms; }
 .calculator-card:hover { border-color: var(--shell); box-shadow: 0 6px 18px #184d4312; background: #f6fbf0; }
 .card-icon { width: 28px; height: 28px; margin-bottom: 16px; fill: none; stroke: var(--shell); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-h2 { margin: 0 0 8px; font-size: 20px; font-weight: 650; line-height: 1.25; letter-spacing: -.5px; }
+h2 { margin: 0 0 8px; padding-right: 28px; font-size: 20px; font-weight: 650; line-height: 1.25; letter-spacing: -.5px; }
 .calculator-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
 .card-arrow { position: absolute; top: 24px; right: 24px; font-size: 18px; }
 footer { padding: 20px 0; margin-top: 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
@@ -30,5 +30,10 @@ footer p { margin: 0; }
     .calculator-card { padding: 20px; }
     .card-icon { margin-bottom: 12px; }
     .card-arrow { top: 20px; right: 20px; }
+}
+@media (max-width: 400px) {
+    body { padding: 0 16px; }
+    .calculator-card { padding: 18px; }
+    .card-arrow { top: 18px; right: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
